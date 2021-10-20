@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="mk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MKQR</title>
+
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="main-container">
+      <form>
+        <div class="creditor-container">
+          <div class="creditor-title-container"><h2 class="title">Информација за Доверител(Примач)</h2></div>
+          <div class="creditor-fields-container">
+            <div class="fields">
+              <label for="">Назив *</label>
+              <input type="text" /><span class="info"></span>
+            </div>
+            <div class="fields">
+              <label for="">Држава</label>
+              <input type="text" /><span class="info"></span>
+            </div>
+            <div class="fields">
+              <label for="">IBAN</label>
+              <input type="text" /><span class="info"></span>
+            </div>
+            <div class="fields">
+              <label for="">IBAN 2</label>
+              <input type="text" /><span class="info"></span>
+            </div>
+            <div class="fields">
+              <label for="">Тип на адреса</label>
+              <input type="text" /><span class="info"></span>
+            </div>
+            <div class="fields">
+              <label for="">Адресна линија 1</label>
+              <input type="text" /><span class="info"></span>
+            </div>
+            <div class="fields">
+              <label for="">Адресна линија 2</label>
+              <input type="text" /><span class="info"></span>
+            </div>
+            <div class="fields">
+              <label for="">Град</label>
+              <input type="text" /><span class="info"></span>
+            </div>
+            <div class="fields">
+              <label for="">Поштенски код</label>
+              <input type="text" /><span class="info"></span>
+            </div>
+          </div>
+        </div>
+        <div class="debtor-container">
+          <div class="debtor-title-container"><h2 class="title">Информација за Должник(Плаќач)</h2></div>
+          <div class="debtor-fields-container">
+            <div class="fields">
+              <label for="">Назив</label>
+              <input type="text" /><span class="info"></span>
+            </div>
+            <div class="fields">
+              <label for="">Држава</label>
+              <input type="text" /><span class="info"></span>
+            </div>
+            <div class="fields">
+              <label for="">Град</label>
+              <input type="text" /><span class="info"></span>
+            </div>
+            <div class="fields">
+              <label for="">Поштенски код</label>
+              <input type="text" /><span class="info"></span>
+            </div>
+            <div class="fields">
+              <label for="">Тип на адреса</label>
+              <input type="text" /><span class="info"></span>
+            </div>
+            <div class="fields">
+              <label for="">Адресна линија 1</label>
+              <input type="text" /><span class="info"></span>
+            </div>
+            <div class="fields">
+              <label for="">Адресна линија 2</label>
+              <input type="text" /><span class="info"></span>
+            </div>
+          </div>
+        </div>
+        <div class="paymentInfo-container">
+          <div class="paymentInfo-title-container"><h2 class="title">Детали за Наплата</h2></div>
+          <div class="paymentInfo-fields-container">
+            <div class="fields">
+              <label for="">Сума</label>
+              <input type="text" /><span class="info"></span>
+            </div>
+            <div class="fields-group">
+              <div class="fields">
+                <label for="">Валута</label>
+                <input type="text" /><span class="info"></span>
+              </div>
+              <div class="fields">
+                <label for="">Тип</label>
+                <input type="text" /><span class="info"></span>
+              </div>
+            </div>
+            <div class="fields">
+              <label for="">Референца</label>
+              <input type="text" /><span class="info"></span>
+            </div>
+            <div class="fields">
+              <label for="">Алтернативни параметри</label>
+              <input type="text" /><span class="info"></span>
+            </div>
+            <div class="fields">
+              <label for="">Алтернативни вредности за плаќање</label>
+              <input type="text" /><span class="info"></span>
+            </div>
+            <div class="fields">
+              <label for="">Неструктурирана порака</label>
+              <input type="text" /><span class="info"></span>
+            </div>
+            <div class="fields">
+              <label for="">Алтернативен опис</label>
+              <input type="text" /><span class="info"></span>
+            </div>
+            <div class="fields">
+              <label for="">Алтернативна валута</label>
+              <input type="text" /><span class="info"></span>
+            </div>
+          </div>
+        </div>
+        <div class="additionalInfo-container">
+          <div class="additionalInfo-title-container"><h2 class="title">Дополнителни Податоци</h2></div>
+          <div class="additionalInfo-fields-container">
+            <div class="fields-group">
+              <div class="fields">
+                <label for="">Код за наплата</label>
+                <input type="text" /><span class="info"></span>
+              </div>
+              <div class="fields">
+                <label for="">Тип на наплата</label>
+                <input type="text" /><span class="info"></span>
+              </div>
+            </div>
+            <div class="fields-group">
+              <div class="fields">
+                <label for="">ПП50 Програма</label>
+                <input type="text" /><span class="info"></span>
+              </div>
+              <div class="fields">
+                <label for="">ПП50 Приходна шифра</label>
+                <input type="text" /><span class="info"></span>
+              </div>
+            </div>
+            <div class="fields">
+              <label for="">ПП50 Уплатна сметка</label>
+              <input type="text" /><span class="info"></span>
+            </div>
+            <div class="fields">
+              <label for="">ПП50 Сметка единка корисник</label>
+              <input type="text" /><span class="info"></span>
+            </div>
+          </div>
+        </div>
+        <div class="btn-container">
+          <button>Прегледај</button>
+        </div>
+      </form>
+    </div>
+    <script src="qrcodegen-v1.7.0-es6.js" async defer></script>
+    <script src="main.js" async defer></script>
+  </body>
+</html>
