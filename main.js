@@ -24,7 +24,7 @@ const fieldsObj = {
   pg: document.getElementById("debtorTown").value,
   pc: document.getElementById("debtorCountry").value,
   rt: document.getElementById("paymentType").value,
-  ref: document.getElementById("paymentRef").value,
+  ref: document.getElementById("paymentReference").value,
   ustrd_PLACEHOLDER: getElementById("paymentUnstructuredMsg"),
   trailer_PLACEHOLDER: "EPD",
   strdBkgInf_PLACEHOLDER: document.getElementById("paymentBillInformation").value,
