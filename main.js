@@ -1,5 +1,47 @@
 const qrCodeContainer = document.querySelector(".qrCode-container");
 
+// Connecting field values with an object
+const fieldsObj = {
+  t: 1,
+  v: 200,
+  c: 1,
+  iban: document.getElementById("creditorAccount").value,
+  aiban: document.getElementById("creditorAccountAlt").value,
+  cat: document.getElementById("creditorAdressType").value,
+  cn: document.getElementById("creditorName").value,
+  cadd1: document.getElementById("creditorAdressLine1").value,
+  cadd2: document.getElementById("creditorAdressLine2").value,
+  cz: document.getElementById("creditorPostalCode").value,
+  cg: document.getElementById("creditorTown").value,
+  cc: document.getElementById("creditorCountry").value,
+  a: document.getElementById("paymentAmount").value,
+  cur: document.getElementById("paymentCurrency").value,
+  pat: document.getElementById("debtorAdressType").value,
+  pn: document.getElementById("debtorName").value,
+  paddr1: document.getElementById("debtorAdressLine1").value,
+  paddr2: document.getElementById("debtorAdressLine2").value,
+  pz: document.getElementById("debtorPostalCode").value,
+  pg: document.getElementById("debtorTown").value,
+  pc: document.getElementById("debtorCountry").value,
+  rt: document.getElementById("paymentType").value,
+  ref: document.getElementById("paymentRef").value,
+  ustrd_PLACEHOLDER: getElementById("paymentUnstructuredMsg"),
+  trailer_PLACEHOLDER: "EPD",
+  strdBkgInf_PLACEHOLDER: document.getElementById("paymentBillInformation").value,
+  curl: document.getElementById("paymentWebsiteURL").value,
+  ap: document.getElementById("paymentAltParameters").value,
+  av: document.getElementById("paymentAltValues").value,
+  ad: document.getElementById("paymentAltDescription").value,
+  ac: document.getElementById("paymentAltCurrency").value,
+  pc: document.getElementById("aInfoPaymentCode").value,
+  nac: document.getElementById("aInfoPaymentType").value,
+  us: document.getElementById("aInfoPP50PaymentAccount").value,
+  usek: document.getElementById("aInfoPP50SingleUserAccount").value,
+  ps: document.getElementById("aInfoPP50IncomeCode").value,
+  pr: document.getElementById("aInfoPP50Program").value,
+};
+
+// QRCODE Implementation
 drawQrCode();
 
 function drawCanvas(qr, scale, border, lightColor, darkColor, canvas) {
