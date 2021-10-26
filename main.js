@@ -1,8 +1,10 @@
 const qrCodeContainer = document.querySelector(".qrCode-container");
 
+let qrText = "";
+
 let btnSubmit = document.querySelector(".btn-submit").addEventListener("click", (e) => {
-  // Connecting field values with an object
   e.preventDefault();
+
   const fieldsObj = {
     t: 1,
     v: 200,
@@ -42,10 +44,22 @@ let btnSubmit = document.querySelector(".btn-submit").addEventListener("click", 
     ps: document.getElementById("aInfoPP50IncomeCode").value,
     pr: document.getElementById("aInfoPP50Program").value,
   };
-  console.log(fieldsObj);
+
+  let keys = Object.keys(fieldsObj);
+  let values = Object.values(fieldsObj);
+
+  for (let i = 0; i < keys.length; i++) {
+    if (i !== keys.length - 1) {
+      qrText = qrText + keys[i] + "=" + values[i] + "&";
+    } else {
+      qrText = qrText + keys[i] + "=" + values[i];
+    }
+  }
+
+  console.log(encodeURI(qrText)); //Test purposes
+  drawQrCode();
+  qrText = "";
 });
-// QRCODE Implementation
-drawQrCode();
 
 function drawCanvas(qr, scale, border, lightColor, darkColor, canvas) {
   if (scale <= 0 || border < 0) throw "Value out of range";
@@ -61,19 +75,17 @@ function drawCanvas(qr, scale, border, lightColor, darkColor, canvas) {
   }
 }
 
-function appendCanvas(caption) {
-  let p = qrCodeContainer.appendChild(document.createElement("p"));
-  p.textContent = caption + ":";
+function appendCanvas() {
   let result = document.createElement("canvas");
   qrCodeContainer.appendChild(result);
   return result;
 }
 
 function drawQrCode() {
-  let text = "placeholderfornow"; //Placeholder
+  let text = encodeURI(qrText); //Text to encode to the QR code
   const errCorrLvl = qrcodegen.QrCode.Ecc.MEDIUM;
 
   const qrCode = qrcodegen.QrCode.encodeText(text, errCorrLvl);
 
-  drawCanvas(qrCode, 10, 4, "#FFFFFF", "#000000", appendCanvas(""));
+  drawCanvas(qrCode, 3, 4, "#FFFFFF", "#000000", appendCanvas());
 }
