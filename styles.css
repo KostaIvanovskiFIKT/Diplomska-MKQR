@@ -6,3 +6,32 @@
   box-sizing: border-box;
   font-family: "Roboto", sans-serif;
 }
+
+.main-container,
+.form-container,
+.creditor-container,
+.debtor-container,
+.paymentInfo-container,
+.additionalInfo-container,
+.btn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column wrap;
+  flex: 1 1 auto;
+}
+
+input {
+  min-width: 100px;
+  max-width: 400px;
+  width: 275px;
+  margin-right: 4px;
+}
+
+label {
+  display: block;
+}
+
+span {
+  vertical-align: middle;
+}
