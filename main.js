@@ -2,7 +2,7 @@ const qrCodeContainer = document.querySelector(".qrCode-container");
 
 let qrText = "";
 
-let btnSubmit = document.querySelector(".btn-submit").addEventListener("click", (e) => {
+let btnSubmit = document.querySelector(".btn-preview").addEventListener("click", (e) => {
   e.preventDefault();
 
   const fieldsObj = {

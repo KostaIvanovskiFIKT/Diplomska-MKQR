@@ -17,13 +17,11 @@
 .creditor-fields-container,
 .debtor-fields-container,
 .paymentInfo-fields-container,
-.additionalInfo-fields-container,
-.btn-container {
+.additionalInfo-fields-container {
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
   flex-flow: column wrap;
-  background-color: rgb(246, 246, 246);
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
 .creditor-container,
@@ -33,22 +31,33 @@
   padding-bottom: 10px;
   box-shadow: 0 0 10px rgb(177, 177, 177);
   flex-wrap: nowrap;
+  background-color: rgb(246, 246, 246);
 }
 
 .creditor-fields-container,
 .debtor-fields-container,
 .paymentInfo-fields-container,
 .additionalInfo-fields-container {
-  width: 635px;
+  width: 600px;
   height: 275px;
   justify-content: flex-start;
+}
+
+.main-container,
+.form-container {
+  justify-content: center;
+  align-items: center;
+}
+
+.main-container {
+  background-color: rgb(230, 230, 230);
 }
 
 .fields-group {
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
-  flex-grow: 1 100%;
+  flex-wrap: nowrap;
 }
 
 .creditor-fields-container {
@@ -60,17 +69,18 @@
 }
 
 .paymentInfo-fields-container {
-  height: 240px;
+  height: 246px;
 }
 
 .additionalInfo-fields-container {
   height: 200px;
+  width: 400px;
+  justify-content: flex-start;
 }
 
 .input-style {
   min-width: 100px;
-  max-width: 400px;
-  width: 275px;
+  width: 255px;
   margin-right: 4px;
   margin-left: 10px;
   border: 1px solid rgb(253, 164, 30);
@@ -89,16 +99,32 @@
 }
 
 #paymentCurrency {
-  width: 116px;
+  width: 106px;
 }
 
 #paymentType {
-  width: 116px;
+  width: 106px;
+}
+
+#aInfoPaymentCode,
+#aInfoPaymentType,
+#aInfoPP50Program,
+#aInfoPP50IncomeCode {
+  width: 135px;
+}
+
+#aInfoPP50PaymentAccount,
+#aInfoPP50SingleUserAccount {
+  width: 312px;
+}
+
+.additionalInfo-container {
+  width: 354px;
 }
 
 .info-icon-creditorAccountAlt {
   position: relative;
-  bottom: 65px;
+  bottom: 55px;
 }
 
 span.info {
@@ -113,6 +139,7 @@ label {
 
 .title {
   margin-top: 10px;
+  width: auto;
 }
 
 span {
@@ -121,10 +148,56 @@ span {
 
 .form-container {
   height: 100vh;
-  width: 100vw;
-  background-color: rgb(230, 230, 230);
+  width: 90vw;
+}
+
+.field .info-icon {
+  opacity: 0.3;
+}
+
+h2 {
+  text-align: center;
+}
+
+.creditor-title-container,
+.debtor-title-container,
+.paymentInfo-title-container,
+.additionalInfo-title-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.infoAndBtn-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.btn-container {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+  width: 226px;
+  margin-left: 20px;
+}
+
+.btn-preview {
+  height: 50px;
+  width: 200px;
+  background-color: rgb(128, 0, 32);
+  color: white;
+  border-radius: 10px;
+  border: 1px solid black;
+  box-shadow: 0 0 10px rgb(177, 177, 177);
+}
+
+.form-container {
+  gap: 20px;
 }
 
 .info-icon {
-  opacity: 0.3;
+  opacity: 0.2;
 }
