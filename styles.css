@@ -14,9 +14,13 @@
 .debtor-container,
 .paymentInfo-container,
 .additionalInfo-container,
+.creditor-fields-container,
+.debtor-fields-container,
+.paymentInfo-fields-container,
+.additionalInfo-fields-container,
 .btn-container {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-flow: column wrap;
   background-color: rgb(246, 246, 246);
@@ -28,6 +32,39 @@
 .additionalInfo-container {
   padding-bottom: 10px;
   box-shadow: 0 0 10px rgb(177, 177, 177);
+  flex-wrap: nowrap;
+}
+
+.creditor-fields-container,
+.debtor-fields-container,
+.paymentInfo-fields-container,
+.additionalInfo-fields-container {
+  width: 635px;
+  height: 275px;
+  justify-content: flex-start;
+}
+
+.fields-group {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-grow: 1 100%;
+}
+
+.creditor-fields-container {
+  height: 246px;
+}
+
+.debtor-fields-container {
+  height: 200px;
+}
+
+.paymentInfo-fields-container {
+  height: 240px;
+}
+
+.additionalInfo-fields-container {
+  height: 200px;
 }
 
 .input-style {
@@ -47,13 +84,21 @@
 }
 
 #creditorAccountAlt {
-  height: 100px;
+  height: 70px;
   resize: none;
+}
+
+#paymentCurrency {
+  width: 116px;
+}
+
+#paymentType {
+  width: 116px;
 }
 
 .info-icon-creditorAccountAlt {
   position: relative;
-  bottom: 85px;
+  bottom: 65px;
 }
 
 span.info {
