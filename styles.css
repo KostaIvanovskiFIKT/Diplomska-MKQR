@@ -46,6 +46,16 @@
   box-shadow: 0 0 2px 1px rgb(253, 164, 30);
 }
 
+#creditorAccountAlt {
+  height: 100px;
+  resize: none;
+}
+
+.info-icon-creditorAccountAlt {
+  position: relative;
+  bottom: 85px;
+}
+
 span.info {
   margin-right: 10px;
 }
@@ -68,4 +78,8 @@ span {
   height: 100vh;
   width: 100vw;
   background-color: rgb(230, 230, 230);
+}
+
+.info-icon {
+  opacity: 0.3;
 }
