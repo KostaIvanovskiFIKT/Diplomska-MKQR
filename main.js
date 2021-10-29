@@ -1,4 +1,5 @@
 const qrCodeContainer = document.querySelector(".qrCode-container");
+const modalScreen = document.querySelector(".modal-screen");
 
 let qrText = "";
 
@@ -59,6 +60,9 @@ let btnSubmit = document.querySelector(".btn-preview").addEventListener("click",
   console.log(encodeURI(qrText)); //Test purposes
   drawQrCode();
   qrText = "";
+
+  modalScreen.classList.add("display-toggle");
+  qrCodeContainer.classList.add("display-toggle");
 });
 
 function drawCanvas(qr, scale, border, lightColor, darkColor, canvas) {
