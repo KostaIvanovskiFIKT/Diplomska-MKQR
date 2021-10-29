@@ -65,6 +65,12 @@ let btnSubmit = document.querySelector(".btn-preview").addEventListener("click",
   qrCodeContainer.classList.add("display-toggle");
 });
 
+modalScreen.addEventListener("click", () => {
+  modalScreen.classList.remove("display-toggle");
+  qrCodeContainer.classList.remove("display-toggle");
+  qrCodeContainer.removeChild(qrCodeContainer.firstChild);
+});
+
 function drawCanvas(qr, scale, border, lightColor, darkColor, canvas) {
   if (scale <= 0 || border < 0) throw "Value out of range";
   const width = (qr.size + border * 2) * scale;
