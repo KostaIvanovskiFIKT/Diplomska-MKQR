@@ -19,59 +19,84 @@
         <div class="creditor-container">
           <div class="creditor-title-container"><h2 class="title">Информација за Доверител (Примач)</h2></div>
           <div class="creditor-fields-container">
-            <div class="fields">
-              <label for="creditorName">Назив *</label>
-              <input id="creditorName" class="input-style" type="text" /><span class="info"
+            <div>
+              <label for="creditorName">Назив*</label>
+              <input id="creditorName" class="input-style" type="text" /><span class="info test"
+                ><span class="tooltip test2">
+                  Име на доверителот на кој што припаѓа акаунтот(сметката) <br /><br />
+                  Може да биде име и презиме на личност или може да биде име на компанија <br /><br />
+                  Максимум 70 карактери, алфанумерчки</span
                 ><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
               /></span>
             </div>
-            <div class="fields">
+            <div>
               <label for="creditorCountry">Држава</label>
               <input id="creditorCountry" class="input-style" type="text" /><span class="info"
-                ><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
+                ><span class="tooltip">Држава на доверителот</span><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
               /></span>
             </div>
-            <div class="fields">
+            <div>
               <label for="creditorAccount">IBAN</label>
               <input id="creditorAccount" class="input-style" type="text" /><span class="info"
+                ><span class="tooltip"
+                  >IBAN(International Bank Account Number) на доверителот <br /><br />
+                  Максимум 17 карактери, алфанумерички</span
                 ><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
               /></span>
             </div>
-            <div class="fields">
+            <div>
               <label for="creditorAccountAlt">IBAN 2</label>
               <textarea id="creditorAccountAlt" class="input-style"></textarea
               ><span class="info"
+                ><span class="tooltip tooltip-creditorAccountAlt">Алтернативни IBAN-ови на доверителот, разделени со pipe "|" карактерот</span
                 ><img class="info-icon info-icon-creditorAccountAlt" src="./assets/info_black_18dp.svg" alt="info icon"
               /></span>
             </div>
-            <div class="fields">
+            <div>
               <label for="creditorAdressType">Тип на адреса</label>
               <input id="creditorAdressType" class="input-style" type="text" /><span class="info"
+                ><span class="tooltip"
+                  >Тип на адреса, може да биде структурирана или комбинирана <br /><br />Структурирана: <br />
+                  Адресна линија 1 - Улица на доверителот <br />
+                  Адресна линија 2 - бројот на објектот на доверителот од улицата <br />
+                  Град и поштенски код мора да се пополнат во нивните соодветни полиња <br /><br />Комбинирана: <br />
+                  Адресна линија 1 - улица и број на доверителот <br />
+                  Адресна линија 2 - Град и поштенски код на доверителот</span
                 ><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
               /></span>
             </div>
-            <div class="fields">
+            <div>
               <label for="creditorAdressLine1">Адресна линија 1</label>
               <input id="creditorAdressLine1" class="input-style" type="text" /><span class="info"
+                ><span class="tooltip"
+                  >Зависно од тип на адреса (структурирана или комбинирана): <br /><br />Структурирана: <br />
+                  -Улица на доверителот <br />
+                  <br />Комбинирана: <br />
+                  -Улица и број на доверителот</span
                 ><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
               /></span>
             </div>
-            <div class="fields">
+            <div>
               <label for="creditorAdressLine2">Адресна линија 2</label>
               <input id="creditorAdressLine2" class="input-style" type="text" /><span class="info"
+                ><span class="tooltip"
+                  >Зависно од тип на адреса (структурирана или комбинирана): <br /><br />Структурирана: <br />
+                  -бројот на објектот на доверителот од улицата <br />
+                  <br />Комбинирана: <br />
+                  -Град и поштенски код на доверителот</span
                 ><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
               /></span>
             </div>
-            <div class="fields">
+            <div>
               <label for="creditorTown">Град</label>
               <input id="creditorTown" class="input-style" type="text" /><span class="info"
-                ><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
+                ><span class="tooltip">Град на доверителот</span><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
               /></span>
             </div>
-            <div class="fields">
+            <div>
               <label for="creditorPostalCode">Поштенски код</label>
               <input id="creditorPostalCode" class="input-style" type="text" /><span class="info"
-                ><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
+                ><span class="tooltip">Поштенски код на доверителот</span><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
               /></span>
             </div>
           </div>
@@ -79,45 +104,66 @@
         <div class="debtor-container">
           <div class="debtor-title-container"><h2 class="title">Информација за Должник (Плаќач)</h2></div>
           <div class="debtor-fields-container">
-            <div class="fields">
+            <div>
               <label for="debtorName">Назив</label>
               <input id="debtorName" class="input-style" type="text" /><span class="info"
+                ><span class="tooltip"
+                  >Име на должникот на кој што припаѓа акаунтот(сметката) <br /><br />
+                  Може да биде име и презиме на личност или може да биде име на компанија <br /><br />
+                  Максимум 70 карактери, алфанумерчки</span
                 ><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
               /></span>
             </div>
-            <div class="fields">
+            <div>
               <label for="debtorCountry">Држава</label>
               <input id="debtorCountry" class="input-style" type="text" /><span class="info"
-                ><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
+                ><span class="tooltip">Држава на должникот</span><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
               /></span>
             </div>
-            <div class="fields">
+            <div>
               <label for="debtorTown">Град</label>
               <input id="debtorTown" class="input-style" type="text" /><span class="info"
-                ><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
+                ><span class="tooltip">Град на должникот</span><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
               /></span>
             </div>
-            <div class="fields">
+            <div>
               <label for="debtorPostalCode">Поштенски код</label>
               <input id="debtorPostalCode" class="input-style" type="text" /><span class="info"
-                ><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
+                ><span class="tooltip">Поштенски код на должникот</span><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
               /></span>
             </div>
-            <div class="fields">
+            <div>
               <label for="debtorAdressType">Тип на адреса</label>
               <input id="debtorAdressType" class="input-style" type="text" /><span class="info"
+                ><span class="tooltip"
+                  >Тип на адреса, може да биде структурирана или комбинирана <br /><br />Структурирана: <br />
+                  Адресна линија 1 - Улица на должникот <br />
+                  Адресна линија 2 - бројот на објектот на должникот од улицата <br />
+                  Град и поштенски код мора да се пополнат во нивните соодветни полиња <br /><br />Комбинирана: <br />
+                  Адресна линија 1 - улица и број на должникот <br />
+                  Адресна линија 2 - Град и поштенски код на должникот</span
                 ><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
               /></span>
             </div>
-            <div class="fields">
+            <div>
               <label for="debtorAdressLine1">Адресна линија 1</label>
               <input id="debtorAdressLine1" class="input-style" type="text" /><span class="info"
+                ><span class="tooltip"
+                  >Зависно од тип на адреса (структурирана или комбинирана): <br /><br />Структурирана: <br />
+                  -Улица на должникот <br />
+                  <br />Комбинирана: <br />
+                  -Улица и број на должникот <br /> </span
                 ><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
               /></span>
             </div>
-            <div class="fields">
+            <div>
               <label for="debtorAdressLine2">Адресна линија 2</label>
               <input id="debtorAdressLine2" class="input-style" type="text" /><span class="info"
+                ><span class="tooltip"
+                  >Зависно од тип на адреса (структурирана или комбинирана): <br /><br />Структурирана: <br />
+                  -бројот на објектот на должникот од улицата <br />
+                  <br />Комбинирана: <br />
+                  -Град и поштенски код на должникот</span
                 ><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
               /></span>
             </div>
@@ -126,72 +172,72 @@
         <div class="paymentInfo-container">
           <div class="paymentInfo-title-container"><h2 class="title">Детали за Наплата</h2></div>
           <div class="paymentInfo-fields-container">
-            <div class="fields">
+            <div>
               <label for="paymentAmount">Сума</label>
               <input id="paymentAmount" class="input-style" type="text" /><span class="info"
-                ><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
+                ><span class="tooltip">This is a tooltip</span><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
               /></span>
             </div>
             <div class="fields-group">
-              <div class="fields">
+              <div>
                 <label for="paymentCurrency">Валута</label>
                 <input id="paymentCurrency" class="input-style" type="text" /><span class="info"
-                  ><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
+                  ><span class="tooltip">This is a tooltip</span><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
                 /></span>
               </div>
-              <div class="fields">
+              <div>
                 <label for="paymentType">Тип</label>
                 <input id="paymentType" class="input-style" type="text" /><span class="info"
-                  ><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
+                  ><span class="tooltip">This is a tooltip</span><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
                 /></span>
               </div>
             </div>
-            <div class="fields">
+            <div>
               <label for="paymentReference">Референца</label>
               <input id="paymentReference" class="input-style" type="text" /><span class="info"
-                ><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
+                ><span class="tooltip">This is a tooltip</span><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
               /></span>
             </div>
-            <div class="fields">
+            <div>
               <label for="paymentAltParameters">Алтернативни параметри</label>
               <input id="paymentAltParameters" class="input-style" type="text" /><span class="info"
-                ><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
+                ><span class="tooltip">This is a tooltip</span><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
               /></span>
             </div>
-            <div class="fields">
+            <div>
               <label for="paymentAltValues">Алтернативни вредности за плаќање</label>
               <input id="paymentAltValues" class="input-style" type="text" /><span class="info"
-                ><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
+                ><span class="tooltip">This is a tooltip</span><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
               /></span>
             </div>
-            <div class="fields">
+            <div>
               <label for="paymentUnstructuredMsg">Неструктурирана порака</label>
               <input id="paymentUnstructuredMsg" class="input-style" type="text" /><span class="info"
-                ><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
+                ><span class="tooltip">This is a tooltip</span><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
               /></span>
             </div>
-            <div class="fields">
+            <div>
               <label for="paymentBillInformation">Информација за уплата</label>
               <input id="paymentBillInformation" class="input-style" type="text" /><span class="info"
-                ><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
+                ><span class="tooltip">This is a tooltip</span><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
               /></span>
             </div>
-            <div class="fields">
+            <div>
               <label for="paymentWebsiteURL">URL</label>
               <input id="paymentWebsiteURL" class="input-style" type="text" /><span class="info"
-                ><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
+                ><span class="tooltip">This is a tooltip</span><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
               /></span>
             </div>
-            <div class="fields">
+            <div>
               <label for="paymentAltDescription">Алтернативен опис</label>
               <input id="paymentAltDescription" class="input-style" type="text" /><span class="info"
-                ><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
+                ><span class="tooltip">This is a tooltip</span><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
               /></span>
             </div>
-            <div class="fields">
+            <div>
               <label for="paymentAltCurrency">Алтернативна валута</label>
               <input id="paymentAltCurrency" class="input-style" type="text" /><span class="info"
-                ><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
+                ><span class="tooltip">This is a tooltip</span><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
               /></span>
             </div>
           </div>
@@ -201,43 +247,43 @@
             <div class="additionalInfo-title-container"><h2 class="title">Дополнителни Податоци</h2></div>
             <div class="additionalInfo-fields-container">
               <div class="fields-group">
-                <div class="fields">
+                <div>
                   <label for="aInfoPaymentCode">Код за наплата</label>
                   <input id="aInfoPaymentCode" class="input-style" type="text" /><span class="info"
-                    ><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
+                    ><span class="tooltip">This is a tooltip</span><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
                   /></span>
                 </div>
-                <div class="fields">
+                <div>
                   <label for="aInfoPaymentType">Тип на наплата</label>
                   <input id="aInfoPaymentType" class="input-style" type="text" /><span class="info"
-                    ><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
+                    ><span class="tooltip">This is a tooltip</span><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
                   /></span>
                 </div>
               </div>
               <div class="fields-group">
-                <div class="fields">
+                <div>
                   <label for="aInfoPP50Program">ПП50 Програма</label>
                   <input id="aInfoPP50Program" class="input-style" type="text" /><span class="info"
-                    ><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
+                    ><span class="tooltip">This is a tooltip</span><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
                   /></span>
                 </div>
-                <div class="fields">
+                <div>
                   <label for="aInfoPP50IncomeCode">ПП50 Приходна шифра</label>
                   <input id="aInfoPP50IncomeCode" class="input-style" type="text" /><span class="info"
-                    ><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
+                    ><span class="tooltip">This is a tooltip</span><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
                   /></span>
                 </div>
               </div>
-              <div class="fields">
+              <div>
                 <label for="aInfoPP50PaymentAccount">ПП50 Уплатна сметка</label>
                 <input id="aInfoPP50PaymentAccount" class="input-style" type="text" /><span class="info"
-                  ><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
+                  ><span class="tooltip">This is a tooltip</span><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
                 /></span>
               </div>
-              <div class="fields">
+              <div>
                 <label for="aInfoPP50SingleUserAccount">ПП50 Сметка единка корисник</label>
                 <input id="aInfoPP50SingleUserAccount" class="input-style" type="text" /><span class="info"
-                  ><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
+                  ><span class="tooltip">This is a tooltip</span><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
                 /></span>
               </div>
             </div>
