@@ -55,6 +55,12 @@
   height: 100vh;
 }
 
+.form-container {
+  height: 100vh;
+  width: 1220px;
+  gap: 20px;
+}
+
 .fields-group {
   display: flex;
   justify-content: flex-start;
@@ -147,12 +153,6 @@ label {
 
 span {
   vertical-align: middle;
-}
-
-.form-container {
-  height: 100vh;
-  width: 1220px;
-  gap: 20px;
 }
 
 .field .info-icon {
