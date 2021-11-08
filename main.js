@@ -100,5 +100,5 @@ function drawQrCode() {
 
   const qrCode = qrcodegen.QrCode.encodeText(text, errCorrLvl);
 
-  drawCanvas(qrCode, 5, 4, "#FFFFFF", "#000000", appendCanvas());
+  drawCanvas(qrCode, 4, 3, "#FFFFFF", "#000000", appendCanvas());
 }

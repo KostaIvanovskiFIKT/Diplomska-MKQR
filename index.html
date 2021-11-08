@@ -37,7 +37,7 @@
           <div class="creditor-fields-container">
             <div>
               <label for="creditorName">Назив*</label>
-              <input id="creditorName" class="input-style" type="text" /><span class="info test"
+              <input id="creditorName" class="input-style" type="text" maxlength="70" /><span class="info test"
                 ><span class="tooltip test2">
                   Име на доверителот на кој што припаѓа акаунтот (сметката) <br /><br />
                   Може да биде име и презиме на личност или може да биде име на компанија <br /><br />
@@ -112,13 +112,13 @@
             </div>
             <div>
               <label for="creditorTown">Град</label>
-              <input id="creditorTown" class="input-style" type="text" /><span class="info"
+              <input id="creditorTown" class="input-style" type="text" maxlength="35" /><span class="info"
                 ><span class="tooltip">Град на доверителот</span><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
               /></span>
             </div>
             <div>
               <label for="creditorPostalCode">Поштенски код</label>
-              <input id="creditorPostalCode" class="input-style" type="text" /><span class="info"
+              <input id="creditorPostalCode" class="input-style" type="text" maxlength="16" /><span class="info"
                 ><span class="tooltip">Поштенски код на доверителот</span><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
               /></span>
             </div>
@@ -129,7 +129,7 @@
           <div class="debtor-fields-container">
             <div>
               <label for="debtorName">Назив</label>
-              <input id="debtorName" class="input-style" type="text" /><span class="info"
+              <input id="debtorName" class="input-style" type="text" maxlength="70" /><span class="info"
                 ><span class="tooltip"
                   >Име на должникот на кој што припаѓа акаунтот(сметката) <br /><br />
                   Може да биде име и презиме на личност или може да биде име на компанија <br /><br />
@@ -147,13 +147,13 @@
             </div>
             <div>
               <label for="debtorTown">Град</label>
-              <input id="debtorTown" class="input-style" type="text" /><span class="info"
+              <input id="debtorTown" class="input-style" type="text" maxlength="35" /><span class="info"
                 ><span class="tooltip">Град на должникот</span><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
               /></span>
             </div>
             <div>
               <label for="debtorPostalCode">Поштенски код</label>
-              <input id="debtorPostalCode" class="input-style" type="text" /><span class="info"
+              <input id="debtorPostalCode" class="input-style" type="text" maxlength="16" /><span class="info"
                 ><span class="tooltip">Поштенски код на должникот</span><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
               /></span>
             </div>
@@ -202,7 +202,7 @@
           <div class="paymentInfo-fields-container">
             <div>
               <label for="paymentAmount">Сума</label>
-              <input id="paymentAmount" class="input-style" type="text" /><span class="info"
+              <input id="paymentAmount" class="input-style" type="text" maxlength="12" /><span class="info"
                 ><span class="tooltip"
                   >Сума за плаќање <br /><br />
                   Сумата треба да е внесена без водечки нули, треба да има децимални сепаратори(разделувачи) и на крајот од сумата треба да има две децимални
@@ -241,7 +241,7 @@
             </div>
             <div>
               <label for="paymentAltParameters">Алтернативни параметри</label>
-              <input id="paymentAltParameters" class="input-style" type="text" /><span class="info"
+              <input id="paymentAltParameters" class="input-style" type="text" maxlength="100" /><span class="info"
                 ><span class="tooltip">This is a tooltip</span><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
               /></span>
             </div>
@@ -256,7 +256,7 @@
             </div>
             <div>
               <label for="paymentUnstructuredMsg">Неструктурирана порака</label>
-              <input id="paymentUnstructuredMsg" class="input-style" type="text" /><span class="info"
+              <input id="paymentUnstructuredMsg" class="input-style" type="text" maxlength="140" /><span class="info"
                 ><span class="tooltip"
                   >Неструктутирана порака ја опишува намената, целта, текстуална информација исл., за плаќањето <br /><br />Максимум 140 карактери,
                   алфанумерички</span
@@ -265,7 +265,7 @@
             </div>
             <div>
               <label for="paymentBillInformation">Информација за уплата</label>
-              <input id="paymentBillInformation" class="input-style" type="text" /><span class="info"
+              <input id="paymentBillInformation" class="input-style" type="text" maxlength="140" /><span class="info"
                 ><span class="tooltip"
                   >Информација за уплата <br /><br />
                   треба да содржи кодирана информација за автоматско резервирање на наплатата<br /><br />Максимум 140 карактери, алфанумерички</span
@@ -303,7 +303,7 @@
               <div class="fields-group">
                 <div>
                   <label for="aInfoPaymentCode">Код за наплата</label>
-                  <input id="aInfoPaymentCode" class="input-style" type="text" /><span class="info"
+                  <input id="aInfoPaymentCode" class="input-style" type="text" maxlength="3" /><span class="info"
                     ><span class="tooltip">Максмум 3 карактери, нумерички</span><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
                   /></span>
                 </div>
@@ -323,7 +323,7 @@
                 </div>
                 <div>
                   <label for="aInfoPP50IncomeCode">ПП50 Приходна шифра</label>
-                  <input id="aInfoPP50IncomeCode" class="input-style" type="text" /><span class="info"
+                  <input id="aInfoPP50IncomeCode" class="input-style" type="text" maxlength="2" /><span class="info"
                     ><span class="tooltip">Максимум 2 карактери, алфанумерички</span><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
                   /></span>
                 </div>
