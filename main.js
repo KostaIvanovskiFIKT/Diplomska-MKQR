@@ -2,15 +2,22 @@ const qrCodeContainer = document.querySelector(".qrCode-container");
 const modalScreen = document.querySelector(".modal-screen");
 const qrScreen = document.querySelector(".qr-screen");
 
-let qrText = "";
+let qrText = ""; // <--- This must NOT be changed here
+
+//Values below can be changed here
+const type = 1; // QR type (can also be "MKD")
+const version = "0100"; // Version of the specifications used in the QR (first 2 numbers are main version, second 2 numbers are the sub-version). This is type string because in javascript you cannot have leading zeros, otherwise, for example, 0100 would instead output 64
+const characterSet = 2; // Coding type (1 for UTF-8 latin restricted character set, 2 for UTF-8 with cyrillic character set)
+const trailer = "EPD"; //Unambiguous indicator for the end of the payment data (EPD - End Payment Data)
 
 let btnSubmit = document.querySelector(".btn-preview").addEventListener("click", (e) => {
   e.preventDefault();
 
+  //Here can be changed the names of the keys and values as well as their order
   const fieldsObj = {
-    t: 1,
-    v: 200,
-    c: 1,
+    t: type,
+    v: version,
+    c: characterSet,
     iban: document.getElementById("creditorAccount").value,
     aiban: document.getElementById("creditorAccountAlt").value,
     cat: document.getElementById("creditorAdressType").value,
@@ -32,7 +39,6 @@ let btnSubmit = document.querySelector(".btn-preview").addEventListener("click",
     rt: document.getElementById("paymentType").value,
     ref: document.getElementById("paymentReference").value,
     ustrd_PLACEHOLDER: document.getElementById("paymentUnstructuredMsg").value,
-    trailer_PLACEHOLDER: "EPD",
     strdBkgInf_PLACEHOLDER: document.getElementById("paymentBillInformation").value,
     curl: document.getElementById("paymentWebsiteURL").value,
     ap: document.getElementById("paymentAltParameters").value,
@@ -45,6 +51,7 @@ let btnSubmit = document.querySelector(".btn-preview").addEventListener("click",
     usek: document.getElementById("aInfoPP50SingleUserAccount").value,
     ps: document.getElementById("aInfoPP50IncomeCode").value,
     pr: document.getElementById("aInfoPP50Program").value,
+    trailer_PLACEHOLDER: trailer,
   };
 
   let keys = Object.keys(fieldsObj);
@@ -54,7 +61,7 @@ let btnSubmit = document.querySelector(".btn-preview").addEventListener("click",
     if (i !== keys.length - 1) {
       qrText = qrText + keys[i] + "=" + values[i] + "&";
     } else {
-      qrText = qrText + keys[i] + "=" + values[i];
+      qrText = qrText + values[i];
     }
   }
 
@@ -64,16 +71,18 @@ let btnSubmit = document.querySelector(".btn-preview").addEventListener("click",
 
   modalScreen.classList.add("display-toggle");
   qrScreen.classList.add("display-toggle-flex");
-  // qrCodeContainer.classList.add("display-toggle");
 });
 
+// Functions
+
+// Modal screen
 modalScreen.addEventListener("click", () => {
   modalScreen.classList.remove("display-toggle");
-  // qrCodeContainer.classList.remove("display-toggle");
   qrCodeContainer.removeChild(qrCodeContainer.firstChild);
   qrScreen.classList.remove("display-toggle-flex");
 });
 
+// Setup for the QR
 function drawCanvas(qr, scale, border, lightColor, darkColor, canvas) {
   if (scale <= 0 || border < 0) throw "Value out of range";
   const width = (qr.size + border * 2) * scale;
@@ -94,6 +103,7 @@ function appendCanvas() {
   return result;
 }
 
+// Creating the QR
 function drawQrCode() {
   let text = encodeURI(qrText); //Text to encode to the QR code
   const errCorrLvl = qrcodegen.QrCode.Ecc.MEDIUM;
