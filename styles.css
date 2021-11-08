@@ -203,13 +203,19 @@ h2 {
   opacity: 0.2;
 }
 
-.qrCode-container {
+.qr-screen {
   display: none;
-  position: fixed;
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 10;
+}
+
+.filled-data {
+  width: 700px;
+  height: 500px;
+  background-color: rgb(238, 238, 238);
 }
 
 .modal-screen {
@@ -229,6 +235,23 @@ h2 {
   display: block;
 }
 
+.display-toggle-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: row nowrap;
+  gap: 30px;
+}
+
+.qr-options {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-flow: column nowrap;
+  height: 500px;
+}
+
+/* tooltips */
 .tooltip {
   display: none;
   position: absolute;

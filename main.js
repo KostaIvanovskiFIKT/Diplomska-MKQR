@@ -1,5 +1,6 @@
 const qrCodeContainer = document.querySelector(".qrCode-container");
 const modalScreen = document.querySelector(".modal-screen");
+const qrScreen = document.querySelector(".qr-screen");
 
 let qrText = "";
 
@@ -62,13 +63,15 @@ let btnSubmit = document.querySelector(".btn-preview").addEventListener("click",
   qrText = "";
 
   modalScreen.classList.add("display-toggle");
-  qrCodeContainer.classList.add("display-toggle");
+  qrScreen.classList.add("display-toggle-flex");
+  // qrCodeContainer.classList.add("display-toggle");
 });
 
 modalScreen.addEventListener("click", () => {
   modalScreen.classList.remove("display-toggle");
-  qrCodeContainer.classList.remove("display-toggle");
+  // qrCodeContainer.classList.remove("display-toggle");
   qrCodeContainer.removeChild(qrCodeContainer.firstChild);
+  qrScreen.classList.remove("display-toggle-flex");
 });
 
 function drawCanvas(qr, scale, border, lightColor, darkColor, canvas) {
@@ -97,5 +100,5 @@ function drawQrCode() {
 
   const qrCode = qrcodegen.QrCode.encodeText(text, errCorrLvl);
 
-  drawCanvas(qrCode, 3, 4, "#FFFFFF", "#000000", appendCanvas());
+  drawCanvas(qrCode, 5, 4, "#FFFFFF", "#000000", appendCanvas());
 }

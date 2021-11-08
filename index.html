@@ -14,7 +14,23 @@
   <body>
     <div class="main-container">
       <div class="modal-screen"></div>
-      <div class="qrCode-container"></div>
+      <div class="qr-screen">
+        <div class="filled-data"></div>
+        <div class="qr-options">
+          <div class="qrCode-container"></div>
+          <h3 class="qrCode-widthHeight">256x256</h3>
+          <div class="qrCode-buttons-widthHeight">
+            <button class="btn-lower-res"><</button>
+            <button class="btn-higher-res">></button>
+          </div>
+          <div class="qrCode-download-options">
+            <a class="btn-PNG" href="#">PNG</a>
+            <a class="btn-SVG" href="#">SVG</a>
+            <a class="btn-JPEG" href="#">JPEG</a>
+            <a class="btn-WEBP" href="#">WEBP</a>
+          </div>
+        </div>
+      </div>
       <form class="form-container">
         <div class="creditor-container">
           <div class="creditor-title-container"><h2 class="title">Информација за Доверител (Примач)</h2></div>
@@ -195,7 +211,7 @@
               <div>
                 <label for="paymentType">Тип</label>
                 <input id="paymentType" class="input-style" type="text" /><span class="info"
-                  ><span class="tooltip">Тип на референца за наплаќање <br /><br />Може да има само три вредности: <br>-QRR <br>-SCOR <br>-NON</span
+                  ><span class="tooltip">Тип на референца за наплаќање <br /><br />Може да има само три вредности: <br />-QRR <br />-SCOR <br />-NON</span
                   ><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
                 /></span>
               </div>
