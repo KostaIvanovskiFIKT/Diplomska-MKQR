@@ -72,7 +72,10 @@
             </div>
             <div>
               <label for="creditorAdressType">Тип на адреса</label>
-              <input id="creditorAdressType" class="input-style" type="text" /><span class="info"
+              <select id="creditorAdressType" class="input-style" type="text">
+                <option value="S">Структурирана</option>
+                <option value="K">Комбинирана</option></select
+              ><span class="info"
                 ><span class="tooltip"
                   >Тип на адреса, може да биде структурирана или комбинирана <br /><br />Структурирана: <br />
                   Адресна линија 1 - Улица на доверителот <br />
@@ -152,7 +155,10 @@
             </div>
             <div>
               <label for="debtorAdressType">Тип на адреса</label>
-              <input id="debtorAdressType" class="input-style" type="text" /><span class="info"
+              <select id="debtorAdressType" class="input-style" type="text">
+                <option value="S">Структурирана</option>
+                <option value="K">Комбинирана</option></select
+              ><span class="info"
                 ><span class="tooltip"
                   >Тип на адреса, може да биде структурирана или комбинирана <br /><br />Структурирана: <br />
                   Адресна линија 1 - Улица на должникот <br />
@@ -204,13 +210,20 @@
             <div class="fields-group">
               <div>
                 <label for="paymentCurrency">Валута</label>
-                <input id="paymentCurrency" class="input-style" type="text" /><span class="info"
+                <select id="paymentCurrency" class="input-style" type="text">
+                  <option value="MKD">MKD</option>
+                  <option value="EUR">EUR</option></select
+                ><span class="info"
                   ><span class="tooltip">Валута во која што ќе се плаќа</span><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
                 /></span>
               </div>
               <div>
                 <label for="paymentType">Тип</label>
-                <input id="paymentType" class="input-style" type="text" /><span class="info"
+                <select id="paymentType" class="input-style" type="text">
+                  <option value="NON">NON</option>
+                  <option value="QRR">QRR</option>
+                  <option value="SCOR">SCOR</option></select
+                ><span class="info"
                   ><span class="tooltip">Тип на референца за наплаќање <br /><br />Може да има само три вредности: <br />-QRR <br />-SCOR <br />-NON</span
                   ><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
                 /></span>

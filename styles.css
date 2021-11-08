@@ -101,6 +101,10 @@
   box-shadow: 0 0 2px 1px rgb(253, 164, 30);
 }
 
+select {
+  padding: 0;
+}
+
 #creditorAccountAlt {
   height: 70px;
   resize: none;
