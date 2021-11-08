@@ -96,9 +96,20 @@
   height: 1.7em;
 }
 
-.input-style:focus {
+.input-style:focus,
+.input-style-select:focus {
   outline: none;
   box-shadow: 0 0 2px 1px rgb(253, 164, 30);
+}
+
+.input-style-select {
+  min-width: 100px;
+  width: 255px;
+  margin-right: 4px;
+  margin-left: 10px;
+  border: 1px solid rgb(253, 164, 30);
+  padding: 1px 0;
+  height: 1.7em;
 }
 
 #creditorAccountAlt {
