@@ -1,6 +1,7 @@
 const qrCodeContainer = document.querySelector(".qrCode-container");
 const modalScreen = document.querySelector(".modal-screen");
 const qrScreen = document.querySelector(".qr-screen");
+const filledData = document.querySelector(".filled-data");
 
 let qrText = ""; // <--- This must NOT be changed here
 
@@ -69,18 +70,48 @@ let btnSubmit = document.querySelector(".btn-preview").addEventListener("click",
   drawQrCode();
   qrText = "";
 
+  const labels = document.querySelectorAll("label");
+  const inputs = document.querySelectorAll(".input-style, .input-style-select");
+
+  for (let i = 0; i < labels.length; i++) {
+    if (inputs[i].value) {
+      const p = document.createElement("p");
+      const spanLabel = document.createElement("span");
+      const spanInputValue = document.createElement("span");
+      spanLabel.classList.add("span-label-data");
+      spanInputValue.classList.add("span-input-data");
+      p.classList.add("p-data-style");
+      spanLabel.innerText = labels[i].innerText;
+      if (inputs[i].options) {
+        spanInputValue.innerText = inputs[i].options[inputs[i].selectedIndex].innerText;
+      } else {
+        spanInputValue.innerText = inputs[i].value;
+      }
+      p.appendChild(spanLabel);
+      p.append(":  ");
+      p.appendChild(spanInputValue);
+      filledData.appendChild(p);
+    } else {
+      continue;
+    }
+  }
+
   modalScreen.classList.add("display-toggle");
   qrScreen.classList.add("display-toggle-flex");
 });
-
-// Functions
 
 // Modal screen
 modalScreen.addEventListener("click", () => {
   modalScreen.classList.remove("display-toggle");
   qrCodeContainer.removeChild(qrCodeContainer.firstChild);
   qrScreen.classList.remove("display-toggle-flex");
+
+  while (filledData.firstChild) {
+    filledData.removeChild(filledData.firstChild);
+  }
 });
+
+// Functions
 
 // Setup for the QR
 function drawCanvas(qr, scale, border, lightColor, darkColor, canvas) {
@@ -106,9 +137,14 @@ function appendCanvas() {
 // Creating the QR
 function drawQrCode() {
   let text = encodeURI(qrText); //Text to encode to the QR code
-  const errCorrLvl = qrcodegen.QrCode.Ecc.MEDIUM;
+
+  const errCorrLvl = qrcodegen.QrCode.Ecc.MEDIUM; //Error correction level
+  // LOW - The QR Code can tolerate about  7% erroneous codewords
+  // MEDIUM - The QR Code can tolerate about 15% erroneous codewords
+  // QUARTILE - The QR Code can tolerate about 25% erroneous codewords
+  // HIGH - The QR Code can tolerate about 30% erroneous codewords
 
   const qrCode = qrcodegen.QrCode.encodeText(text, errCorrLvl);
 
-  drawCanvas(qrCode, 4, 3, "#FFFFFF", "#000000", appendCanvas());
+  drawCanvas(qrCode, 5, 3, "#FFFFFF", "#000000", appendCanvas());
 }

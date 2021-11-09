@@ -239,6 +239,7 @@ h2 {
   flex: 1 1 100%;
   width: 700px;
   height: 520px;
+  padding: 5px;
   background-color: rgb(238, 238, 238);
   border-radius: 3px;
   border: 1px solid black;
@@ -284,6 +285,7 @@ h2 {
   align-items: center;
   min-width: 415px;
   min-height: 415px;
+  transform: scale(0.5); /* Scale of the QR Code */
 }
 
 h3 {
@@ -336,6 +338,22 @@ h3 {
   justify-content: center;
   align-items: center;
   flex-flow: row nowrap;
+}
+
+.p-data-style {
+  font-size: 0.9rem;
+  word-wrap: break-word;
+  width: 320px;
+  margin: 1px;
+}
+
+.span-label-data {
+  font-weight: bold;
+  font-size: 0.8rem;
+}
+
+.span-input-data {
+  font-size: 0.85rem;
 }
 /* tooltips */
 .tooltip {
