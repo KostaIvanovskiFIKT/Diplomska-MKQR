@@ -194,7 +194,7 @@ h2 {
   display: flex;
   flex-flow: column wrap;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
   height: 100%;
   width: 226px;
   margin-left: 20px;
@@ -203,6 +203,7 @@ h2 {
 .btn-preview {
   height: 45px;
   width: 200px;
+  margin: 0 auto;
   background-color: rgb(128, 0, 32);
   color: white;
   border-radius: 5px;
@@ -216,6 +217,23 @@ h2 {
 
 .btn-preview:active {
   background-color: rgb(70, 1, 18);
+}
+
+.stats-style {
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.stats-style span {
+  font-size: 1.1rem;
+}
+
+.stats-style div {
+  padding: 1.5px;
+}
+
+.bold {
+  font-weight: bold;
 }
 
 .info-icon {

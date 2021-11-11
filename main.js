@@ -4,14 +4,66 @@ const qrScreen = document.querySelector(".qr-screen");
 const filledData = document.querySelector(".filled-data");
 const qrWidthHeight = document.querySelector(".qrCode-widthHeight");
 const btnExitModalScreen = document.querySelector(".btn-modal-exit");
+const btnContainer = document.querySelector(".btn-container");
 
 let qrText = ""; // <--- This must NOT be changed here
 
 //Values below can be changed here
 const type = 1; // QR type (can also be "MKD")
 const version = "0100"; // Version of the specifications used in the QR (first 2 numbers are main version, second 2 numbers are the sub-version). This is type string because in javascript you cannot have leading zeros, otherwise, for example, 0100 would instead output 64
-const characterSet = 2; // Coding type (1 for UTF-8 latin restricted character set, 2 for UTF-8 with cyrillic character set)
+const characterSet = 2; // Character encoding (1 for UTF-8 latin restricted character set, 2 for UTF-8 with cyrillic character set)
 const trailer = "EPD"; //Unambiguous indicator for the end of the payment data (EPD - End Payment Data)
+
+const typeSpan = document.createElement("span");
+const typeValueSpan = document.createElement("span");
+typeSpan.innerText = "QR Тип";
+typeSpan.classList.add("bold");
+typeValueSpan.innerText = type;
+
+const versionSpan = document.createElement("span");
+const versionValueSpan = document.createElement("span");
+versionSpan.innerText = "Верзија";
+versionSpan.classList.add("bold");
+versionValueSpan.innerText = version;
+
+const characterSetSpan = document.createElement("span");
+const characterSetValueSpan = document.createElement("span");
+characterSetSpan.innerText = "Енкодирање карактери";
+characterSetSpan.classList.add("bold");
+characterSetValueSpan.innerText = characterSet;
+
+const trailerSpan = document.createElement("span");
+const trailerValueSpan = document.createElement("span");
+trailerSpan.innerText = "Трејлер";
+trailerSpan.classList.add("bold");
+trailerValueSpan.innerText = trailer;
+
+const wrapDiv1 = document.createElement("div");
+wrapDiv1.appendChild(typeSpan);
+wrapDiv1.append(": ");
+wrapDiv1.appendChild(typeValueSpan);
+const wrapDiv2 = document.createElement("div");
+wrapDiv2.appendChild(versionSpan);
+wrapDiv2.append(": ");
+wrapDiv2.appendChild(versionValueSpan);
+const wrapDiv3 = document.createElement("div");
+wrapDiv3.appendChild(characterSetSpan);
+wrapDiv3.append(": ");
+wrapDiv3.appendChild(characterSetValueSpan);
+const wrapDiv4 = document.createElement("div");
+wrapDiv4.appendChild(trailerSpan);
+wrapDiv4.append(": ");
+wrapDiv4.appendChild(trailerValueSpan);
+
+const wrapDivAll = document.createElement("div");
+wrapDivAll.classList.add("stats-style");
+
+wrapDivAll.appendChild(wrapDiv1);
+wrapDivAll.appendChild(wrapDiv2);
+wrapDivAll.appendChild(wrapDiv3);
+wrapDivAll.appendChild(wrapDiv4);
+
+btnContainer.appendChild(wrapDivAll);
 
 let btnSubmit = document.querySelector(".btn-preview").addEventListener("click", (e) => {
   e.preventDefault();
