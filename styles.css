@@ -236,7 +236,6 @@ h2 {
   justify-content: flex-start;
   align-items: flex-start;
   flex-flow: column wrap;
-  flex: 1 1 100%;
   width: 700px;
   height: 520px;
   padding: 5px;
@@ -267,7 +266,7 @@ h2 {
   justify-content: center;
   align-items: center;
   flex-flow: row nowrap;
-  gap: 30px;
+  gap: 5px;
 }
 
 .qr-options {
@@ -276,6 +275,25 @@ h2 {
   align-items: center;
   flex-flow: column nowrap;
   height: 500px;
+  width: 500px;
+}
+
+.btn-modal-exit {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  z-index: 100;
+  opacity: 0.7;
+  font-weight: bolder;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: 2px solid white;
+  color: white;
+}
+
+.btn-modal-exit:hover {
+  opacity: 1;
 }
 
 .qrCode-container {
@@ -285,6 +303,7 @@ h2 {
   align-items: center;
   min-width: 415px;
   min-height: 415px;
+  overflow: visible;
   transform: scale(0.5); /* Scale of the QR Code */
 }
 

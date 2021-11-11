@@ -3,6 +3,7 @@ const modalScreen = document.querySelector(".modal-screen");
 const qrScreen = document.querySelector(".qr-screen");
 const filledData = document.querySelector(".filled-data");
 const qrWidthHeight = document.querySelector(".qrCode-widthHeight");
+const btnExitModalScreen = document.querySelector(".btn-modal-exit");
 
 let qrText = ""; // <--- This must NOT be changed here
 
@@ -105,7 +106,7 @@ let btnSubmit = document.querySelector(".btn-preview").addEventListener("click",
 });
 
 // Modal screen
-modalScreen.addEventListener("click", () => {
+btnExitModalScreen.addEventListener("click", () => {
   modalScreen.classList.remove("display-toggle");
   qrCodeContainer.removeChild(qrCodeContainer.firstChild);
   qrScreen.classList.remove("display-toggle-flex");
