@@ -2,6 +2,7 @@ const qrCodeContainer = document.querySelector(".qrCode-container");
 const modalScreen = document.querySelector(".modal-screen");
 const qrScreen = document.querySelector(".qr-screen");
 const filledData = document.querySelector(".filled-data");
+const qrWidthHeight = document.querySelector(".qrCode-widthHeight");
 
 let qrText = ""; // <--- This must NOT be changed here
 
@@ -98,6 +99,9 @@ let btnSubmit = document.querySelector(".btn-preview").addEventListener("click",
 
   modalScreen.classList.add("display-toggle");
   qrScreen.classList.add("display-toggle-flex");
+
+  const canvas = document.querySelector("canvas");
+  qrWidthHeight.innerText = canvas.width + "x" + canvas.height;
 });
 
 // Modal screen
