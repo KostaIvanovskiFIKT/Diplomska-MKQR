@@ -5,8 +5,12 @@ const filledData = document.querySelector(".filled-data");
 const qrWidthHeight = document.querySelector(".qrCode-widthHeight");
 const btnExitModalScreen = document.querySelector(".btn-modal-exit");
 const btnContainer = document.querySelector(".btn-container");
+const btnLowerRes = document.querySelector(".btn-lower-res");
+const btnHigherRes = document.querySelector(".btn-higher-res");
 
 let qrText = ""; // <--- This must NOT be changed here
+let qrScale = 5; //Default value
+let qrBorder = 3; //Default value
 
 //Values below can be changed here
 const type = 1; // QR type (can also be "MKD")
@@ -122,7 +126,6 @@ let btnSubmit = document.querySelector(".btn-preview").addEventListener("click",
 
   console.log(encodeURI(qrText)); //Test purposes
   drawQrCode();
-  qrText = "";
 
   const labels = document.querySelectorAll("label");
   const inputs = document.querySelectorAll(".input-style, .input-style-select");
@@ -142,7 +145,7 @@ let btnSubmit = document.querySelector(".btn-preview").addEventListener("click",
         spanInputValue.innerText = inputs[i].value;
       }
       p.appendChild(spanLabel);
-      p.append(":  ");
+      p.append(": ");
       p.appendChild(spanInputValue);
       filledData.appendChild(p);
     } else {
@@ -157,8 +160,29 @@ let btnSubmit = document.querySelector(".btn-preview").addEventListener("click",
   qrWidthHeight.innerText = canvas.width + "x" + canvas.height;
 });
 
+btnHigherRes.addEventListener("click", () => {
+  const canvas = document.querySelector("canvas");
+  if (canvas.height <= 800) {
+    qrScale = qrScale + 1;
+    refreshQR();
+  } else {
+    return;
+  }
+});
+
+btnLowerRes.addEventListener("click", () => {
+  const canvas = document.querySelector("canvas");
+  if (canvas.height >= 336) {
+    qrScale = qrScale - 1;
+    refreshQR();
+  } else {
+    return;
+  }
+});
+
 // Modal screen
 btnExitModalScreen.addEventListener("click", () => {
+  qrText = "";
   modalScreen.classList.remove("display-toggle");
   qrCodeContainer.removeChild(qrCodeContainer.firstChild);
   qrScreen.classList.remove("display-toggle-flex");
@@ -169,6 +193,13 @@ btnExitModalScreen.addEventListener("click", () => {
 });
 
 // Functions
+
+function refreshQR() {
+  qrCodeContainer.removeChild(qrCodeContainer.firstChild);
+  drawQrCode();
+  const canvas = document.querySelector("canvas");
+  qrWidthHeight.innerText = canvas.width + "x" + canvas.height;
+}
 
 // Setup for the QR
 function drawCanvas(qr, scale, border, lightColor, darkColor, canvas) {
@@ -203,5 +234,5 @@ function drawQrCode() {
 
   const qrCode = qrcodegen.QrCode.encodeText(text, errCorrLvl);
 
-  drawCanvas(qrCode, 5, 3, "#FFFFFF", "#000000", appendCanvas());
+  drawCanvas(qrCode, qrScale, qrBorder, "#FFFFFF", "#000000", appendCanvas());
 }
