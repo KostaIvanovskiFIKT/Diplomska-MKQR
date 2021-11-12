@@ -7,6 +7,11 @@ const btnExitModalScreen = document.querySelector(".btn-modal-exit");
 const btnContainer = document.querySelector(".btn-container");
 const btnLowerRes = document.querySelector(".btn-lower-res");
 const btnHigherRes = document.querySelector(".btn-higher-res");
+const btnPNG = document.querySelector(".btn-PNG");
+const btnJPEG = document.querySelector(".btn-JPEG");
+const btnSVG = document.querySelector(".btn-SVG");
+const btnWEBP = document.querySelector(".btn-WEBP");
+const btnPreview = document.querySelector(".btn-preview");
 
 let qrText = ""; // <--- This must NOT be changed here
 let qrScale = 5; //Default value
@@ -73,7 +78,7 @@ wrapDivAll.appendChild(wrapDiv4);
 
 btnContainer.appendChild(wrapDivAll);
 
-let btnSubmit = document.querySelector(".btn-preview").addEventListener("click", (e) => {
+btnPreview.addEventListener("click", (e) => {
   e.preventDefault();
 
   //Here can be changed the names of the keys and values as well as their order
@@ -186,6 +191,30 @@ btnLowerRes.addEventListener("click", () => {
   } else {
     return;
   }
+});
+
+btnPNG.addEventListener("click", () => {
+  const imgPNG = document.querySelector("canvas");
+  const dataURL = imgPNG.toDataURL("image/png");
+  btnPNG.setAttribute("href", dataURL);
+  const canvas = document.querySelector("canvas");
+  btnPNG.setAttribute("download", "MKQR_" + canvas.width + "x" + canvas.height);
+});
+
+btnJPEG.addEventListener("click", () => {
+  const imgPNG = document.querySelector("canvas");
+  const dataURL = imgPNG.toDataURL("image/jpeg");
+  btnPNG.setAttribute("href", dataURL);
+  const canvas = document.querySelector("canvas");
+  btnPNG.setAttribute("download", "MKQR_" + canvas.width + "x" + canvas.height);
+});
+
+btnWEBP.addEventListener("click", () => {
+  const imgPNG = document.querySelector("canvas");
+  const dataURL = imgPNG.toDataURL("image/webp");
+  btnPNG.setAttribute("href", dataURL);
+  const canvas = document.querySelector("canvas");
+  btnPNG.setAttribute("download", "MKQR_" + canvas.width + "x" + canvas.height);
 });
 
 // Modal screen
