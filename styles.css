@@ -271,8 +271,13 @@ h2 {
   z-index: 5;
 }
 
-.display-toggle {
+.display-toggle,
+.display-block {
   display: block;
+}
+
+.display-none {
+  display: none;
 }
 
 .display-toggle-flex {

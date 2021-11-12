@@ -12,6 +12,10 @@ let qrText = ""; // <--- This must NOT be changed here
 let qrScale = 5; //Default value
 let qrBorder = 3; //Default value
 
+let canvasDefaultHeight;
+let firstClickOnPreview = true;
+const canvasMaxHeight = 805;
+
 //Values below can be changed here
 const type = 1; // QR type (can also be "MKD")
 const version = "0100"; // Version of the specifications used in the QR (first 2 numbers are main version, second 2 numbers are the sub-version). This is type string because in javascript you cannot have leading zeros, otherwise, for example, 0100 would instead output 64
@@ -125,7 +129,7 @@ let btnSubmit = document.querySelector(".btn-preview").addEventListener("click",
   }
 
   console.log(encodeURI(qrText)); //Test purposes
-  drawQrCode();
+  drawQrCode("display-block");
 
   const labels = document.querySelectorAll("label");
   const inputs = document.querySelectorAll(".input-style, .input-style-select");
@@ -158,23 +162,27 @@ let btnSubmit = document.querySelector(".btn-preview").addEventListener("click",
 
   const canvas = document.querySelector("canvas");
   qrWidthHeight.innerText = canvas.width + "x" + canvas.height;
+  if (firstClickOnPreview) canvasDefaultHeight = canvas.height;
+  firstClickOnPreview = false;
 });
 
 btnHigherRes.addEventListener("click", () => {
+  qrScale = qrScale + 1;
+  refreshQR("display-none");
   const canvas = document.querySelector("canvas");
-  if (canvas.height <= 800) {
-    qrScale = qrScale + 1;
-    refreshQR();
+  if (canvas.height > canvasMaxHeight) {
+    qrScale = qrScale - 1;
+    refreshQR("display-block");
   } else {
-    return;
+    refreshQR("display-block");
   }
 });
 
 btnLowerRes.addEventListener("click", () => {
   const canvas = document.querySelector("canvas");
-  if (canvas.height >= 336) {
+  if (canvas.height > canvasDefaultHeight) {
     qrScale = qrScale - 1;
-    refreshQR();
+    refreshQR("display-block");
   } else {
     return;
   }
@@ -194,9 +202,9 @@ btnExitModalScreen.addEventListener("click", () => {
 
 // Functions
 
-function refreshQR() {
+function refreshQR(className) {
   qrCodeContainer.removeChild(qrCodeContainer.firstChild);
-  drawQrCode();
+  drawQrCode(className);
   const canvas = document.querySelector("canvas");
   qrWidthHeight.innerText = canvas.width + "x" + canvas.height;
 }
@@ -216,14 +224,15 @@ function drawCanvas(qr, scale, border, lightColor, darkColor, canvas) {
   }
 }
 
-function appendCanvas() {
+function appendCanvas(className) {
   let result = document.createElement("canvas");
+  result.classList.add(className);
   qrCodeContainer.appendChild(result);
   return result;
 }
 
 // Creating the QR
-function drawQrCode() {
+function drawQrCode(className) {
   let text = encodeURI(qrText); //Text to encode to the QR code
 
   const errCorrLvl = qrcodegen.QrCode.Ecc.MEDIUM; //Error correction level
@@ -234,5 +243,5 @@ function drawQrCode() {
 
   const qrCode = qrcodegen.QrCode.encodeText(text, errCorrLvl);
 
-  drawCanvas(qrCode, qrScale, qrBorder, "#FFFFFF", "#000000", appendCanvas());
+  drawCanvas(qrCode, qrScale, qrBorder, "#FFFFFF", "#000000", appendCanvas(className));
 }
