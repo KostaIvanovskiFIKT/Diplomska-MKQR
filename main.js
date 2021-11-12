@@ -12,17 +12,21 @@ const btnJPEG = document.querySelector(".btn-JPEG");
 const btnSVG = document.querySelector(".btn-SVG");
 const btnWEBP = document.querySelector(".btn-WEBP");
 const btnPreview = document.querySelector(".btn-preview");
-
-let qrScale = 5; //Default value
-let qrBorder = 3; //Default value
-const canvasMaxHeight = 805;
-
 let qrText = "";
 let canvasDefaultHeight;
 let firstClickOnPreview = true;
-let svgUrl; //
+let svgUrl;
 
-//Values below can be changed here
+let qrScale = 5; //Default value, can be changed here
+let qrBorder = 3; //Default value, can be changed here, this is the white (can be other colors as well) border around the QR Code
+const canvasMaxHeight = 805; //Max height for the canvas, bigger than this will overlap with the text on screen unless the css is styled differently, can only be changed here
+const errCorrLvl = qrcodegen.QrCode.Ecc.MEDIUM; //Error correction level
+// LOW - The QR Code can tolerate about  7% erroneous codewords
+// MEDIUM - The QR Code can tolerate about 15% erroneous codewords
+// QUARTILE - The QR Code can tolerate about 25% erroneous codewords
+// HIGH - The QR Code can tolerate about 30% erroneous codewords
+// Bigger Error Correction Level also means the QR will be larger!!!
+
 const type = 1; // QR type (can also be "MKD")
 const version = "0100"; // Version of the specifications used in the QR (first 2 numbers are main version, second 2 numbers are the sub-version). This is type string because in javascript you cannot have leading zeros, otherwise, for example, 0100 would instead output 64
 const characterSet = 2; // Character encoding (1 for UTF-8 latin restricted character set, 2 for UTF-8 with cyrillic character set)
@@ -231,6 +235,7 @@ btnSVG.addEventListener("click", () => {
 // Modal screen
 btnExitModalScreen.addEventListener("click", () => {
   qrText = "";
+  svgUrl = "";
   modalScreen.classList.remove("display-toggle");
   qrCodeContainer.removeChild(qrCodeContainer.firstChild);
   qrScreen.classList.remove("display-toggle-flex");
@@ -240,8 +245,9 @@ btnExitModalScreen.addEventListener("click", () => {
   }
 });
 
-// Functions
+// Functions Below
 
+//Redraws the qr
 function refreshQR(className) {
   qrCodeContainer.removeChild(qrCodeContainer.firstChild);
   drawQrCode(className);
@@ -275,12 +281,6 @@ function appendCanvas(className) {
 function drawQrCode(className) {
   let text = encodeURI(qrText); //Text to encode to the QR code
 
-  const errCorrLvl = qrcodegen.QrCode.Ecc.MEDIUM; //Error correction level
-  // LOW - The QR Code can tolerate about  7% erroneous codewords
-  // MEDIUM - The QR Code can tolerate about 15% erroneous codewords
-  // QUARTILE - The QR Code can tolerate about 25% erroneous codewords
-  // HIGH - The QR Code can tolerate about 30% erroneous codewords
-
   const qrCode = qrcodegen.QrCode.encodeText(text, errCorrLvl);
 
   drawCanvas(qrCode, qrScale, qrBorder, "#FFFFFF", "#000000", appendCanvas(className));
@@ -289,7 +289,6 @@ function drawQrCode(className) {
 //Generating svg string
 function generateSvgString() {
   let text = encodeURI(qrText);
-  const errCorrLvl = qrcodegen.QrCode.Ecc.MEDIUM;
   const qrCode = qrcodegen.QrCode.encodeText(text, errCorrLvl);
   return toSvgString(qrCode, qrBorder, "#FFFFFF", "#000000");
 }
