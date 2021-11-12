@@ -202,19 +202,19 @@ btnPNG.addEventListener("click", () => {
 });
 
 btnJPEG.addEventListener("click", () => {
-  const imgPNG = document.querySelector("canvas");
-  const dataURL = imgPNG.toDataURL("image/jpeg");
-  btnPNG.setAttribute("href", dataURL);
+  const imgJPEG = document.querySelector("canvas");
+  const dataURL = imgJPEG.toDataURL("image/jpeg");
+  btnJPEG.setAttribute("href", dataURL);
   const canvas = document.querySelector("canvas");
-  btnPNG.setAttribute("download", "MKQR_" + canvas.width + "x" + canvas.height);
+  btnJPEG.setAttribute("download", "MKQR_" + canvas.width + "x" + canvas.height);
 });
 
 btnWEBP.addEventListener("click", () => {
-  const imgPNG = document.querySelector("canvas");
-  const dataURL = imgPNG.toDataURL("image/webp");
-  btnPNG.setAttribute("href", dataURL);
+  const imgWEBP = document.querySelector("canvas");
+  const dataURL = imgWEBP.toDataURL("image/webp");
+  btnWEBP.setAttribute("href", dataURL);
   const canvas = document.querySelector("canvas");
-  btnPNG.setAttribute("download", "MKQR_" + canvas.width + "x" + canvas.height);
+  btnWEBP.setAttribute("download", "MKQR_" + canvas.width + "x" + canvas.height);
 });
 
 // Modal screen
