@@ -13,13 +13,14 @@ const btnSVG = document.querySelector(".btn-SVG");
 const btnWEBP = document.querySelector(".btn-WEBP");
 const btnPreview = document.querySelector(".btn-preview");
 
-let qrText = ""; // <--- This must NOT be changed here
 let qrScale = 5; //Default value
 let qrBorder = 3; //Default value
+const canvasMaxHeight = 805;
 
+let qrText = "";
 let canvasDefaultHeight;
 let firstClickOnPreview = true;
-const canvasMaxHeight = 805;
+let svgUrl; //
 
 //Values below can be changed here
 const type = 1; // QR type (can also be "MKD")
@@ -136,6 +137,10 @@ btnPreview.addEventListener("click", (e) => {
   console.log(encodeURI(qrText)); //Test purposes
   drawQrCode("display-block");
 
+  let svgImageString = generateSvgString();
+  svgUrl = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svgImageString);
+  // console.log(svgImageString); //Test purposes
+
   const labels = document.querySelectorAll("label");
   const inputs = document.querySelectorAll(".input-style, .input-style-select");
 
@@ -217,6 +222,12 @@ btnWEBP.addEventListener("click", () => {
   btnWEBP.setAttribute("download", "MKQR_" + canvas.width + "x" + canvas.height);
 });
 
+btnSVG.addEventListener("click", () => {
+  btnSVG.setAttribute("href", svgUrl);
+  const canvas = document.querySelector("canvas");
+  btnSVG.setAttribute("download", "MKQR");
+});
+
 // Modal screen
 btnExitModalScreen.addEventListener("click", () => {
   qrText = "";
@@ -273,4 +284,29 @@ function drawQrCode(className) {
   const qrCode = qrcodegen.QrCode.encodeText(text, errCorrLvl);
 
   drawCanvas(qrCode, qrScale, qrBorder, "#FFFFFF", "#000000", appendCanvas(className));
+}
+
+//Generating svg string
+function generateSvgString() {
+  let text = encodeURI(qrText);
+  const errCorrLvl = qrcodegen.QrCode.Ecc.MEDIUM;
+  const qrCode = qrcodegen.QrCode.encodeText(text, errCorrLvl);
+  return toSvgString(qrCode, qrBorder, "#FFFFFF", "#000000");
+}
+
+function toSvgString(qr, border, lightColor, darkColor) {
+  if (border < 0) throw "Border must be non-negative";
+  let parts = [];
+  for (let y = 0; y < qr.size; y++) {
+    for (let x = 0; x < qr.size; x++) {
+      if (qr.getModule(x, y)) parts.push(`M${x + border},${y + border}h1v1h-1z`);
+    }
+  }
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 ${qr.size + border * 2} ${qr.size + border * 2}" stroke="none">
+<rect width="100%" height="100%" fill="${lightColor}"/>
+<path d="${parts.join(" ")}" fill="${darkColor}"/>
+</svg>
+`;
 }
