@@ -143,12 +143,43 @@ btnPreview.addEventListener("click", (e) => {
 
   let svgImageString = generateSvgString();
   svgUrl = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svgImageString);
-  // console.log(svgImageString); //Test purposes
 
   const labels = document.querySelectorAll("label");
   const inputs = document.querySelectorAll(".input-style, .input-style-select");
 
   for (let i = 0; i < labels.length; i++) {
+    if (i === 0) {
+      const titleCreditor = document.querySelector(".creditor-title-container h2.title");
+      console.log(titleCreditor.innerText);
+      const filledDataTitleCreditor = document.createElement("h3");
+      filledDataTitleCreditor.classList.add("filled-data-title");
+      filledDataTitleCreditor.innerText = titleCreditor.innerText;
+      filledData.appendChild(filledDataTitleCreditor);
+    }
+    if (i === 9) {
+      const titleDebtor = document.querySelector(".debtor-title-container h2.title");
+      console.log(titleDebtor.innerText);
+      const filledDataTitleDebtor = document.createElement("h3");
+      filledDataTitleDebtor.classList.add("filled-data-title");
+      filledDataTitleDebtor.innerText = titleDebtor.innerText;
+      filledData.appendChild(filledDataTitleDebtor);
+    }
+    if (i === 16) {
+      const titlePaymentInfo = document.querySelector(".paymentInfo-title-container h2.title");
+      console.log(titlePaymentInfo.innerText);
+      const filledDataTitlePaymentInfo = document.createElement("h3");
+      filledDataTitlePaymentInfo.classList.add("filled-data-title");
+      filledDataTitlePaymentInfo.innerText = titlePaymentInfo.innerText;
+      filledData.appendChild(filledDataTitlePaymentInfo);
+    }
+    if (i === 27) {
+      const titleAdditionalInfo = document.querySelector(".additionalInfo-title-container h2.title");
+      console.log(titleAdditionalInfo.innerText);
+      const filledDataTitleAdditionalInfo = document.createElement("h3");
+      filledDataTitleAdditionalInfo.classList.add("filled-data-title");
+      filledDataTitleAdditionalInfo.innerText = titleAdditionalInfo.innerText;
+      filledData.appendChild(filledDataTitleAdditionalInfo);
+    }
     if (inputs[i].value) {
       const p = document.createElement("p");
       const spanLabel = document.createElement("span");

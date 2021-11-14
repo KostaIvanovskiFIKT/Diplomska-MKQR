@@ -251,7 +251,7 @@ h2 {
   align-items: flex-start;
   flex-flow: column wrap;
   width: 700px;
-  height: 520px;
+  height: 530px;
   padding: 5px;
   background-color: rgb(238, 238, 238);
   border-radius: 3px;
@@ -326,9 +326,13 @@ h2 {
   transform: scale(0.5); /* Scale of the QR Code */
 }
 
-h3 {
+.qr-options h3 {
   color: white;
   text-shadow: 0 0 3px black;
+}
+
+.filled-data-title:not(:first-child) {
+  margin-top: 10px;
 }
 
 .btn-download {
@@ -397,6 +401,7 @@ h3 {
 .tooltip {
   display: none;
   position: absolute;
+  opacity: 10%;
   top: 7px;
   right: 12px;
   padding: 5px;
@@ -407,6 +412,14 @@ h3 {
   height: auto;
   border-radius: 3px;
   z-index: 10;
+}
+
+.tooltip:active {
+  visibility: hidden;
+}
+
+.inverse {
+  transform: translateY(-100%);
 }
 
 .info:hover .tooltip {
