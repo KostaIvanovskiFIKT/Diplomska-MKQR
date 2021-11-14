@@ -112,6 +112,12 @@
   height: 1.7em;
 }
 
+.required-active {
+  border: 1px solid rgb(211, 0, 0);
+  box-shadow: 0 0 2px rgb(194, 0, 0);
+  background-color: rgb(231, 213, 213);
+}
+
 #creditorAccountAlt {
   height: 70px;
   resize: none;
@@ -401,7 +407,6 @@ h2 {
 .tooltip {
   display: none;
   position: absolute;
-  opacity: 10%;
   top: 7px;
   right: 12px;
   padding: 5px;

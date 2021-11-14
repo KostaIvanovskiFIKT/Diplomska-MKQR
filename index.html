@@ -37,8 +37,8 @@
           <div class="creditor-title-container"><h2 class="title">Информација за Доверител (Примач)</h2></div>
           <div class="creditor-fields-container">
             <div>
-              <label for="creditorName">Назив</label>
-              <input id="creditorName" class="input-style" type="text" maxlength="70" /><span class="info test"
+              <label for="creditorName">Назив<span>*</span></label>
+              <input id="creditorName" class="input-style" type="text" maxlength="70" required /><span class="info test"
                 ><span class="tooltip test2">
                   Име на доверителот на кој што припаѓа акаунтот (сметката) <br /><br />
                   Може да биде име и презиме на личност или може да биде име на компанија <br /><br />
@@ -56,7 +56,7 @@
             </div>
             <div>
               <label for="creditorAccount">IBAN</label>
-              <input id="creditorAccount" class="input-style" type="text" /><span class="info"
+              <input id="creditorAccount" class="input-style" type="text" required /><span class="info"
                 ><span class="tooltip"
                   >IBAN (International Bank Account Number) на доверителот <br /><br />
                   Максимум 17 карактери, алфанумерички</span
@@ -113,13 +113,13 @@
             </div>
             <div>
               <label for="creditorTown">Град</label>
-              <input id="creditorTown" class="input-style" type="text" maxlength="35" /><span class="info"
+              <input id="creditorTown" class="input-style" type="text" maxlength="35" required /><span class="info"
                 ><span class="tooltip">Град на доверителот</span><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
               /></span>
             </div>
             <div>
               <label for="creditorPostalCode">Поштенски код</label>
-              <input id="creditorPostalCode" class="input-style" type="text" maxlength="16" /><span class="info"
+              <input id="creditorPostalCode" class="input-style" type="text" maxlength="16" required /><span class="info"
                 ><span class="tooltip">Поштенски код на доверителот</span><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
               /></span>
             </div>
@@ -141,6 +141,7 @@
             <div>
               <label for="debtorCountry">Држава</label>
               <select id="debtorCountry" class="input-style-select" type="text">
+                <option value="">-</option>
                 <option value="MK">Македонија МК</option></select
               ><span class="info"
                 ><span class="tooltip">Држава на должникот</span><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
@@ -161,6 +162,7 @@
             <div>
               <label for="debtorAdressType">Тип на адреса</label>
               <select id="debtorAdressType" class="input-style-select" type="text">
+                <option value="">-</option>
                 <option value="S">Структурирана</option>
                 <option value="K">Комбинирана</option></select
               ><span class="info"
@@ -344,7 +346,7 @@
             </div>
           </div>
           <div class="btn-container">
-            <button class="btn btn-preview">Прегледај</button>
+            <button type="submit" class="btn btn-preview">Прегледај</button>
           </div>
         </div>
       </form>

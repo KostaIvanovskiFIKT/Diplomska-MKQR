@@ -12,6 +12,7 @@ const btnJPEG = document.querySelector(".btn-JPEG");
 const btnSVG = document.querySelector(".btn-SVG");
 const btnWEBP = document.querySelector(".btn-WEBP");
 const btnPreview = document.querySelector(".btn-preview");
+const listOfFields = document.querySelectorAll(".input-style, .input-style-select");
 let qrText = "";
 let canvasDefaultHeight;
 let firstClickOnPreview = true;
@@ -25,11 +26,11 @@ const errCorrLvl = qrcodegen.QrCode.Ecc.MEDIUM; //Error correction level
 // MEDIUM - The QR Code can tolerate about 15% erroneous codewords
 // QUARTILE - The QR Code can tolerate about 25% erroneous codewords
 // HIGH - The QR Code can tolerate about 30% erroneous codewords
-// Bigger Error Correction Level also means the QR will be larger!!!
+// Bigger Error Correction Level also means the QR will be larger
 
-const type = 1; // QR type (can also be "MKD")
-const version = "0100"; // Version of the specifications used in the QR (first 2 numbers are main version, second 2 numbers are the sub-version). This is type string because in javascript you cannot have leading zeros, otherwise, for example, 0100 would instead output 64
-const characterSet = 2; // Character encoding (1 for UTF-8 latin restricted character set, 2 for UTF-8 with cyrillic character set)
+const type = "1"; // QR type (can also be "MKD")
+const version = "0100"; // Version of the specifications used in the QR (first 2 numbers are main version, second 2 numbers are the sub-version).
+const characterSet = "2"; // Character encoding (1 for UTF-8 latin restricted character set, 2 for UTF-8 with cyrillic character set)
 const trailer = "EPD"; //Unambiguous indicator for the end of the payment data (EPD - End Payment Data)
 
 const typeSpan = document.createElement("span");
@@ -83,8 +84,15 @@ wrapDivAll.appendChild(wrapDiv4);
 
 btnContainer.appendChild(wrapDivAll);
 
+for (let i = 0; i < listOfFields.length; i++) {
+  listOfFields[i].addEventListener("focus", (e) => {
+    e.target.classList.remove("required-active");
+  });
+}
+
 btnPreview.addEventListener("click", (e) => {
   e.preventDefault();
+  validateData();
 
   //Here can be changed the names of the keys and values as well as their order
   const fieldsObj = {
@@ -150,7 +158,6 @@ btnPreview.addEventListener("click", (e) => {
   for (let i = 0; i < labels.length; i++) {
     if (i === 0) {
       const titleCreditor = document.querySelector(".creditor-title-container h2.title");
-      console.log(titleCreditor.innerText);
       const filledDataTitleCreditor = document.createElement("h3");
       filledDataTitleCreditor.classList.add("filled-data-title");
       filledDataTitleCreditor.innerText = titleCreditor.innerText;
@@ -158,7 +165,6 @@ btnPreview.addEventListener("click", (e) => {
     }
     if (i === 9) {
       const titleDebtor = document.querySelector(".debtor-title-container h2.title");
-      console.log(titleDebtor.innerText);
       const filledDataTitleDebtor = document.createElement("h3");
       filledDataTitleDebtor.classList.add("filled-data-title");
       filledDataTitleDebtor.innerText = titleDebtor.innerText;
@@ -166,7 +172,6 @@ btnPreview.addEventListener("click", (e) => {
     }
     if (i === 16) {
       const titlePaymentInfo = document.querySelector(".paymentInfo-title-container h2.title");
-      console.log(titlePaymentInfo.innerText);
       const filledDataTitlePaymentInfo = document.createElement("h3");
       filledDataTitlePaymentInfo.classList.add("filled-data-title");
       filledDataTitlePaymentInfo.innerText = titlePaymentInfo.innerText;
@@ -174,7 +179,6 @@ btnPreview.addEventListener("click", (e) => {
     }
     if (i === 27) {
       const titleAdditionalInfo = document.querySelector(".additionalInfo-title-container h2.title");
-      console.log(titleAdditionalInfo.innerText);
       const filledDataTitleAdditionalInfo = document.createElement("h3");
       filledDataTitleAdditionalInfo.classList.add("filled-data-title");
       filledDataTitleAdditionalInfo.innerText = titleAdditionalInfo.innerText;
@@ -197,8 +201,36 @@ btnPreview.addEventListener("click", (e) => {
       p.append(": ");
       p.appendChild(spanInputValue);
       filledData.appendChild(p);
-    } else {
-      continue;
+    }
+
+    if (
+      i === 15 &&
+      !document.getElementById("debtorName").value &&
+      !document.getElementById("debtorAdressType").value &&
+      !document.getElementById("debtorCountry").value &&
+      !document.getElementById("debtorTown").value &&
+      !document.getElementById("debtorPostalCode").value &&
+      !document.getElementById("debtorAdressLine1").value &&
+      !document.getElementById("debtorAdressLine2").value
+    ) {
+      const p = document.createElement("p");
+      p.classList.add("p-data-style");
+      p.innerText = "-";
+      filledData.appendChild(p);
+    }
+    if (
+      i === 27 &&
+      !document.getElementById("aInfoPaymentCode").value &&
+      !document.getElementById("aInfoPaymentType").value &&
+      !document.getElementById("aInfoPP50Program").value &&
+      !document.getElementById("aInfoPP50IncomeCode").value &&
+      !document.getElementById("aInfoPP50PaymentAccount").value &&
+      !document.getElementById("aInfoPP50SingleUserAccount").value
+    ) {
+      const p = document.createElement("p");
+      p.classList.add("p-data-style");
+      p.innerText = "-";
+      filledData.appendChild(p);
     }
   }
 
@@ -277,6 +309,37 @@ btnExitModalScreen.addEventListener("click", () => {
 });
 
 // Functions Below
+
+function validateData() {
+  let fieldsMissingValue = false;
+  let messageMissingValue = "На едно или повеќе задолжителни полиња им недостасува вредност!";
+
+  if (
+    document.getElementById("debtorName").value ||
+    document.getElementById("debtorAdressType").value ||
+    document.getElementById("debtorCountry").value ||
+    document.getElementById("debtorTown").value ||
+    document.getElementById("debtorPostalCode").value ||
+    document.getElementById("debtorAdressLine1").value ||
+    document.getElementById("debtorAdressLine2").value
+  ) {
+    document.getElementById("debtorName").required = true;
+    document.getElementById("debtorAdressType").required = true;
+    document.getElementById("debtorCountry").required = true;
+    document.getElementById("debtorTown").required = true;
+    document.getElementById("debtorPostalCode").required = true;
+    document.getElementById("debtorAdressLine1").required = true;
+    document.getElementById("debtorAdressLine2").required = true;
+  }
+
+  for (i = 0; i < listOfFields.length; i++) {
+    if (listOfFields[i].validity.valueMissing) {
+      fieldsMissingValue = true;
+      listOfFields[i].classList.add("required-active");
+    }
+  }
+  if (fieldsMissingValue) throw alert(messageMissingValue);
+}
 
 //Redraws the qr
 function refreshQR(className) {
