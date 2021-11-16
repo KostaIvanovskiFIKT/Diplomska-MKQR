@@ -13,6 +13,8 @@ const btnSVG = document.querySelector(".btn-SVG");
 const btnWEBP = document.querySelector(".btn-WEBP");
 const btnPreview = document.querySelector(".btn-preview");
 const listOfFields = document.querySelectorAll(".input-style, .input-style-select");
+const creditorSelect = document.getElementById("creditorAdressType");
+const debtorSelect = document.getElementById("debtorAdressType");
 let qrText = "";
 let canvasDefaultHeight;
 let firstClickOnPreview = true;
@@ -305,6 +307,62 @@ btnExitModalScreen.addEventListener("click", () => {
 
   while (filledData.firstChild) {
     filledData.removeChild(filledData.firstChild);
+  }
+});
+
+creditorSelect.addEventListener("change", () => {
+  if (creditorSelect.options.selectedIndex === 1) {
+    const townField = document.querySelector(".creditorTownDiv");
+    townField.classList.add("lower-opacity");
+    const inputTown = document.getElementById("creditorTown");
+    inputTown.required = false;
+    inputTown.disabled = true;
+
+    const postalCodeField = document.querySelector(".creditorPostalCodeDiv");
+    postalCodeField.classList.add("lower-opacity");
+    const inputPostalCode = document.getElementById("creditorPostalCode");
+    inputPostalCode.required = false;
+    inputPostalCode.disabled = true;
+  } else {
+    const townField = document.querySelector(".creditorTownDiv");
+    townField.classList.remove("lower-opacity");
+    const inputTown = document.getElementById("creditorTown");
+    inputTown.required = true;
+    inputTown.disabled = false;
+
+    const postalCodeField = document.querySelector(".creditorPostalCodeDiv");
+    postalCodeField.classList.remove("lower-opacity");
+    const inputPostalCode = document.getElementById("creditorPostalCode");
+    inputPostalCode.required = true;
+    inputPostalCode.disabled = false;
+  }
+});
+
+debtorSelect.addEventListener("change", () => {
+  if (debtorSelect.options.selectedIndex === 2) {
+    const townField = document.querySelector(".debtorTownDiv");
+    townField.classList.add("lower-opacity");
+    const inputTown = document.getElementById("debtorTown");
+    inputTown.required = false;
+    inputTown.disabled = true;
+
+    const postalCodeField = document.querySelector(".debtorPostalCodeDiv");
+    postalCodeField.classList.add("lower-opacity");
+    const inputPostalCode = document.getElementById("debtorPostalCode");
+    inputPostalCode.required = false;
+    inputPostalCode.disabled = true;
+  } else {
+    const townField = document.querySelector(".debtorTownDiv");
+    townField.classList.remove("lower-opacity");
+    const inputTown = document.getElementById("debtorTown");
+    inputTown.required = true;
+    inputTown.disabled = false;
+
+    const postalCodeField = document.querySelector(".debtorPostalCodeDiv");
+    postalCodeField.classList.remove("lower-opacity");
+    const inputPostalCode = document.getElementById("debtorPostalCode");
+    inputPostalCode.required = true;
+    inputPostalCode.disabled = false;
   }
 });
 

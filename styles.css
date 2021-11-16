@@ -292,6 +292,10 @@ h2 {
   display: none;
 }
 
+.lower-opacity {
+  opacity: 0.4;
+}
+
 .display-toggle-flex {
   display: flex;
   justify-content: center;
