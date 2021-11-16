@@ -163,6 +163,12 @@ label {
   font-weight: bold;
 }
 
+.display-label {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
 .title {
   margin-top: 10px;
   width: auto;
