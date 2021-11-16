@@ -319,23 +319,51 @@ function validateData() {
     document.getElementById("debtorAdressType").value ||
     document.getElementById("debtorCountry").value ||
     document.getElementById("debtorTown").value ||
-    document.getElementById("debtorPostalCode").value ||
-    document.getElementById("debtorAdressLine1").value ||
-    document.getElementById("debtorAdressLine2").value
+    document.getElementById("debtorPostalCode").value
+    // document.getElementById("debtorAdressLine1").value
+    // document.getElementById("debtorAdressLine2").value
   ) {
     document.getElementById("debtorName").required = true;
     document.getElementById("debtorAdressType").required = true;
     document.getElementById("debtorCountry").required = true;
     document.getElementById("debtorTown").required = true;
     document.getElementById("debtorPostalCode").required = true;
-    document.getElementById("debtorAdressLine1").required = true;
-    document.getElementById("debtorAdressLine2").required = true;
+    // document.getElementById("debtorAdressLine1").required = true;
+    // document.getElementById("debtorAdressLine2").required = true;
+  } else {
+    document.getElementById("debtorName").required = false;
+    document.getElementById("debtorAdressType").required = false;
+    document.getElementById("debtorCountry").required = false;
+    document.getElementById("debtorTown").required = false;
+    document.getElementById("debtorPostalCode").required = false;
+    // document.getElementById("debtorAdressLine1").required = false;
+    // document.getElementById("debtorAdressLine2").required = false;
+  }
+
+  if (
+    document.getElementById("aInfoPaymentCode").value ||
+    document.getElementById("aInfoPaymentType").value ||
+    document.getElementById("aInfoPP50Program").value ||
+    document.getElementById("aInfoPP50IncomeCode").value ||
+    document.getElementById("aInfoPP50PaymentAccount").value ||
+    document.getElementById("aInfoPP50SingleUserAccount").value
+  ) {
+    document.getElementById("aInfoPaymentCode").required = true;
+    document.getElementById("aInfoPP50Program").required = true;
+    document.getElementById("aInfoPP50IncomeCode").required = true;
+  } else {
+    document.getElementById("aInfoPaymentCode").required = false;
+    document.getElementById("aInfoPP50Program").required = false;
+    document.getElementById("aInfoPP50IncomeCode").required = false;
   }
 
   for (i = 0; i < listOfFields.length; i++) {
     if (listOfFields[i].validity.valueMissing) {
       fieldsMissingValue = true;
       listOfFields[i].classList.add("required-active");
+    }
+    if (listOfFields[i].required === false && listOfFields[i].classList.contains("required-active")) {
+      listOfFields[i].classList.remove("required-active");
     }
   }
   if (fieldsMissingValue) throw alert(messageMissingValue);
