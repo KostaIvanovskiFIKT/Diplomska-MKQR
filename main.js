@@ -318,6 +318,11 @@ creditorSelect.addEventListener("change", () => {
     inputTown.required = false;
     inputTown.disabled = true;
 
+    const creditorAdressLine1 = document.getElementById("creditorAdressLine1");
+    const creditorAdressLine2 = document.getElementById("creditorAdressLine2");
+    creditorAdressLine1.required = true;
+    creditorAdressLine2.required = true;
+
     const postalCodeField = document.querySelector(".creditorPostalCodeDiv");
     postalCodeField.classList.add("lower-opacity");
     const inputPostalCode = document.getElementById("creditorPostalCode");
@@ -329,6 +334,11 @@ creditorSelect.addEventListener("change", () => {
     const inputTown = document.getElementById("creditorTown");
     inputTown.required = true;
     inputTown.disabled = false;
+
+    const creditorAdressLine1 = document.getElementById("creditorAdressLine1");
+    const creditorAdressLine2 = document.getElementById("creditorAdressLine2");
+    creditorAdressLine1.required = false;
+    creditorAdressLine2.required = false;
 
     const postalCodeField = document.querySelector(".creditorPostalCodeDiv");
     postalCodeField.classList.remove("lower-opacity");
@@ -346,6 +356,11 @@ debtorSelect.addEventListener("change", () => {
     inputTown.required = false;
     inputTown.disabled = true;
 
+    const debtorAdressLine1 = document.getElementById("debtorAdressLine1");
+    const debtorAdressLine2 = document.getElementById("debtorAdressLine2");
+    debtorAdressLine1.required = true;
+    debtorAdressLine2.required = true;
+
     const postalCodeField = document.querySelector(".debtorPostalCodeDiv");
     postalCodeField.classList.add("lower-opacity");
     const inputPostalCode = document.getElementById("debtorPostalCode");
@@ -357,6 +372,11 @@ debtorSelect.addEventListener("change", () => {
     const inputTown = document.getElementById("debtorTown");
     inputTown.required = true;
     inputTown.disabled = false;
+
+    const debtorAdressLine1 = document.getElementById("debtorAdressLine1");
+    const debtorAdressLine2 = document.getElementById("debtorAdressLine2");
+    debtorAdressLine1.required = false;
+    debtorAdressLine2.required = false;
 
     const postalCodeField = document.querySelector(".debtorPostalCodeDiv");
     postalCodeField.classList.remove("lower-opacity");
