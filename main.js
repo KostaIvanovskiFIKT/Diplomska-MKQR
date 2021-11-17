@@ -317,6 +317,7 @@ creditorSelect.addEventListener("change", () => {
     const inputTown = document.getElementById("creditorTown");
     inputTown.required = false;
     inputTown.disabled = true;
+    inputTown.value = "";
 
     const creditorAdressLine1 = document.getElementById("creditorAdressLine1");
     const creditorAdressLine2 = document.getElementById("creditorAdressLine2");
@@ -328,6 +329,7 @@ creditorSelect.addEventListener("change", () => {
     const inputPostalCode = document.getElementById("creditorPostalCode");
     inputPostalCode.required = false;
     inputPostalCode.disabled = true;
+    inputPostalCode.value = "";
   } else {
     const townField = document.querySelector(".creditorTownDiv");
     townField.classList.remove("lower-opacity");
@@ -355,6 +357,7 @@ debtorSelect.addEventListener("change", () => {
     const inputTown = document.getElementById("debtorTown");
     inputTown.required = false;
     inputTown.disabled = true;
+    inputTown.value = "";
 
     const debtorAdressLine1 = document.getElementById("debtorAdressLine1");
     const debtorAdressLine2 = document.getElementById("debtorAdressLine2");
@@ -366,6 +369,7 @@ debtorSelect.addEventListener("change", () => {
     const inputPostalCode = document.getElementById("debtorPostalCode");
     inputPostalCode.required = false;
     inputPostalCode.disabled = true;
+    inputPostalCode.value = "";
   } else {
     const townField = document.querySelector(".debtorTownDiv");
     townField.classList.remove("lower-opacity");

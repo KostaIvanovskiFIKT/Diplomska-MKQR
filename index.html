@@ -13,6 +13,14 @@
   </head>
   <body>
     <div class="main-container">
+      <div class="outer-author">
+        <div class="author">
+          <p>
+            Изработил: <br />
+            Коста Ивановски ИНКИ363
+          </p>
+        </div>
+      </div>
       <div class="modal-screen"><button class="btn-modal-exit">X</button></div>
       <div class="qr-screen">
         <div class="filled-data"></div>
@@ -56,7 +64,7 @@
             </div>
             <div>
               <div class="display-label"><label for="creditorAccount">IBAN</label><span>*</span></div>
-              <input id="creditorAccount" class="input-style" type="text" required /><span class="info"
+              <input id="creditorAccount" class="input-style" type="text" required maxlength="17" /><span class="info"
                 ><span class="tooltip"
                   >IBAN (International Bank Account Number) на доверителот <br /><br />
                   Максимум 17 карактери, алфанумерички</span
@@ -65,7 +73,7 @@
             </div>
             <div>
               <label for="creditorAccountAlt">IBAN 2</label>
-              <textarea id="creditorAccountAlt" class="input-style"></textarea
+              <textarea id="creditorAccountAlt" class="input-style" maxlength="75"></textarea
               ><span class="info"
                 ><span class="tooltip tooltip-creditorAccountAlt"
                   >Алтернативни IBAN-ови на доверителот, разделени со pipe "|" карактерот <br />
@@ -103,7 +111,7 @@
             </div>
             <div>
               <label for="creditorAdressLine2">Адресна линија 2</label>
-              <input id="creditorAdressLine2" class="input-style" type="text" /><span class="info"
+              <input id="creditorAdressLine2" class="input-style" type="text" maxlength="16" /><span class="info"
                 ><span class="tooltip"
                   >Зависно од тип на адреса (структурирана или комбинирана): <br /><br />Структурирана: <br />
                   -Бројот на објектот на доверителот од улицата <br />
@@ -179,7 +187,7 @@
             </div>
             <div>
               <label for="debtorAdressLine1">Адресна линија 1</label>
-              <input id="debtorAdressLine1" class="input-style" type="text" /><span class="info"
+              <input id="debtorAdressLine1" class="input-style" type="text" maxlength="70" /><span class="info"
                 ><span class="tooltip inverse"
                   >Зависно од тип на адреса (структурирана или комбинирана): <br /><br />Структурирана: <br />
                   -Улица на должникот <br />
@@ -190,7 +198,7 @@
             </div>
             <div>
               <label for="debtorAdressLine2">Адресна линија 2</label>
-              <input id="debtorAdressLine2" class="input-style" type="text" /><span class="info"
+              <input id="debtorAdressLine2" class="input-style" type="text" maxlength="16" /><span class="info"
                 ><span class="tooltip inverse"
                   >Зависно од тип на адреса (структурирана или комбинирана): <br /><br />Структурирана: <br />
                   -Бројот на објектот на должникот од улицата <br />
@@ -250,7 +258,7 @@
             </div>
             <div>
               <label for="paymentAltParameters">Алтернативни параметри</label>
-              <input id="paymentAltParameters" class="input-style" type="text" maxlength="100" /><span class="info"
+              <input id="paymentAltParameters" class="input-style" type="text" maxlength="100" /><span class="info visibility-hidden"
                 ><span class="tooltip">This is a tooltip</span><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
               /></span>
             </div>
@@ -293,7 +301,7 @@
               <input id="paymentAltDescription" class="input-style" type="text" /><span class="info"
                 ><span class="tooltip"
                   >Алтернативен опис за наплатата, може да има повеќе описи разделени со pipe ("|") операторот <br /><br />
-                  Пример: паркинг за 1 час|паркинг за 4часа <br /><br />Максимум</span
+                  Пример: паркинг за 1 час|паркинг за 4часа</span
                 ><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
               /></span>
             </div>
@@ -326,7 +334,7 @@
               <div class="fields-group">
                 <div>
                   <div class="display-label"><label for="aInfoPP50Program">ПП50 Програма</label><span>*</span></div>
-                  <input id="aInfoPP50Program" class="input-style" type="text" /><span class="info"
+                  <input id="aInfoPP50Program" class="input-style" type="text" /><span class="info visibility-hidden"
                     ><span class="tooltip">This is a tooltip</span><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
                   /></span>
                 </div>
@@ -339,13 +347,13 @@
               </div>
               <div>
                 <label for="aInfoPP50PaymentAccount">ПП50 Уплатна сметка</label>
-                <input id="aInfoPP50PaymentAccount" class="input-style" type="text" /><span class="info"
+                <input id="aInfoPP50PaymentAccount" class="input-style" type="text" /><span class="info visibility-hidden"
                   ><span class="tooltip">This is a tooltip</span><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
                 /></span>
               </div>
               <div>
                 <label for="aInfoPP50SingleUserAccount">ПП50 Сметка единка корисник</label>
-                <input id="aInfoPP50SingleUserAccount" class="input-style" type="text" /><span class="info"
+                <input id="aInfoPP50SingleUserAccount" class="input-style" type="text" /><span class="info visibility-hidden"
                   ><span class="tooltip">This is a tooltip</span><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
                 /></span>
               </div>

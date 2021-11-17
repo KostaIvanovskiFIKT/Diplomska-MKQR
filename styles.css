@@ -286,15 +286,6 @@ h2 {
   z-index: 5;
 }
 
-.display-toggle,
-.display-block {
-  display: block;
-}
-
-.display-none {
-  display: none;
-}
-
 .lower-opacity {
   opacity: 0.4;
 }
@@ -452,25 +443,38 @@ h2 {
   top: -50px;
 }
 
-/* .test2::after {
-  content: "hello there \A yo";
-} */
-
-/* span::before {
-  display: none;
-  width: 270px;
-  max-width: 200px;
-  max-height: 300px;
-  content: "asdaaaaaaaaaaa\A aaaaa";
-  word-wrap: break-word;
-  position: absolute;
-  margin-top: -5px;
-  margin-left: -5%;
-  top: 51%;
-  z-index: 10000;
-  background: red;
+.display-toggle,
+.display-block {
+  display: block;
 }
 
-span:hover::before {
-  display: block;
-} */
+.display-none {
+  display: none;
+}
+
+.visibility-hidden {
+  visibility: hidden;
+}
+
+.outer-author {
+  overflow: hidden;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 5%;
+  right: 0;
+  min-width: 250px;
+  min-height: 70px;
+}
+
+.author {
+  background-color: rgb(246, 246, 246);
+  position: absolute;
+  width: 250px;
+  height: 50px;
+  padding: 10px;
+  border-radius: 10px;
+  transform: translateX(10%);
+  box-shadow: 0 0 10px 1px darkgray;
+}
