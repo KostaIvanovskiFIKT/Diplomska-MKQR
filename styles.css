@@ -478,3 +478,9 @@ h2 {
   transform: translateX(10%);
   box-shadow: 0 0 10px 1px darkgray;
 }
+
+.btn-download,
+.btn-res {
+  user-select: none;
+  cursor: pointer;
+}
