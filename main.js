@@ -15,6 +15,7 @@ const btnPreview = document.querySelector(".btn-preview");
 const listOfFields = document.querySelectorAll(".input-style, .input-style-select");
 const creditorSelect = document.getElementById("creditorAdressType");
 const debtorSelect = document.getElementById("debtorAdressType");
+const referenceType = document.getElementById("paymentType");
 let qrText = "";
 let canvasDefaultHeight;
 let firstClickOnPreview = true;
@@ -297,7 +298,6 @@ btnSVG.addEventListener("click", () => {
   btnSVG.setAttribute("download", "MKQR");
 });
 
-// Modal screen
 btnExitModalScreen.addEventListener("click", () => {
   qrText = "";
   svgUrl = "";
@@ -386,6 +386,18 @@ debtorSelect.addEventListener("change", () => {
   }
 });
 
+referenceType.addEventListener("change", () => {
+  if (referenceType.options.selectedIndex === 2) {
+    if (document.getElementById("paymentReference").value.length > 25) {
+      document.getElementById("paymentReference").value = "";
+      document.getElementById("paymentReference").classList.add("required-active");
+    }
+    document.getElementById("paymentReference").setAttribute("maxlength", 25);
+  } else {
+    document.getElementById("paymentReference").setAttribute("maxlength", 27);
+  }
+});
+
 // Functions Below
 
 function validateData() {
@@ -433,6 +445,12 @@ function validateData() {
     document.getElementById("aInfoPaymentCode").required = false;
     document.getElementById("aInfoPP50Program").required = false;
     document.getElementById("aInfoPP50IncomeCode").required = false;
+  }
+
+  if (document.getElementById("paymentType").options.selectedIndex === 1) {
+    document.getElementById("paymentReference").required = true;
+  } else {
+    document.getElementById("paymentReference").required = false;
   }
 
   for (i = 0; i < listOfFields.length; i++) {

@@ -69,6 +69,7 @@
               ><span class="info"
                 ><span class="tooltip tooltip-creditorAccountAlt"
                   >Алтернативни IBAN-ови на доверителот, разделени со pipe "|" карактерот <br />
+                  <br />
                   Максимум 75 карактери, алфанумерички</span
                 ><img class="info-icon info-icon-creditorAccountAlt" src="./assets/info_black_18dp.svg" alt="info icon"
               /></span>
@@ -81,10 +82,10 @@
               ><span class="info"
                 ><span class="tooltip"
                   >Тип на адреса, може да биде структурирана или комбинирана <br /><br />Структурирана: <br />
-                  Адресна линија 1 - Улица на доверителот <br />
+                  Адресна линија 1 - Улица на доверителот или P.O. Box <br />
                   Адресна линија 2 - бројот на објектот на доверителот од улицата <br />
                   Град и поштенски код мора да се пополнат во нивните соодветни полиња <br /><br />Комбинирана: <br />
-                  Адресна линија 1 - улица и број на доверителот <br />
+                  Адресна линија 1 - улица и број на доверителот или P.O. Box <br />
                   Адресна линија 2 - Град и поштенски код на доверителот</span
                 ><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
               /></span>
@@ -231,15 +232,20 @@
                   <option value="QRR">QRR</option>
                   <option value="SCOR">SCOR</option></select
                 ><span class="info"
-                  ><span class="tooltip">Тип на референца за наплаќање <br /><br />Може да има само три вредности: <br />-QRR <br />-SCOR <br />-NON</span
+                  ><span class="tooltip"
+                    >Тип на референца за наплаќање <br /><br />Може да има само три вредности: <br />-QRR <br />-SCOR (Creditor Reference - ISO 11649)<br />-NON</span
                   ><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
                 /></span>
               </div>
             </div>
             <div>
               <label for="paymentReference">Референца</label>
-              <input id="paymentReference" class="input-style" type="text" /><span class="info"
-                ><span class="tooltip">This is a tooltip</span><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
+              <input id="paymentReference" class="input-style" type="text" maxlength="27" /><span class="info"
+                ><span class="tooltip"
+                  >Зависно од типот на референца <br /><br />Ако е: <br />-QRR - Максимум 27 карактери, алфанумерички <br />
+                  Мора да се пополни доколку е селектиран овој код <br /><br />-SCOR - Максимум 25 карактери, алфанумерички <br /><br />-NON - Не треба да се
+                  поплни доколку оваа вредност е селектирана</span
+                ><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
               /></span>
             </div>
             <div>
@@ -305,7 +311,7 @@
             <div class="additionalInfo-fields-container">
               <div class="fields-group">
                 <div>
-                  <label for="aInfoPaymentCode">Код за наплата</label>
+                  <div class="display-label"><label for="aInfoPaymentCode">Код за наплата</label><span>*</span></div>
                   <input id="aInfoPaymentCode" class="input-style" type="text" maxlength="3" /><span class="info"
                     ><span class="tooltip">Максмум 3 карактери, нумерички</span><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
                   /></span>
@@ -319,13 +325,13 @@
               </div>
               <div class="fields-group">
                 <div>
-                  <label for="aInfoPP50Program">ПП50 Програма</label>
+                  <div class="display-label"><label for="aInfoPP50Program">ПП50 Програма</label><span>*</span></div>
                   <input id="aInfoPP50Program" class="input-style" type="text" /><span class="info"
                     ><span class="tooltip">This is a tooltip</span><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
                   /></span>
                 </div>
                 <div>
-                  <label for="aInfoPP50IncomeCode">ПП50 Приходна шифра</label>
+                  <div class="display-label"><label for="aInfoPP50IncomeCode">ПП50 Приходна шифра</label><span>*</span></div>
                   <input id="aInfoPP50IncomeCode" class="input-style" type="text" maxlength="2" /><span class="info"
                     ><span class="tooltip">Максимум 2 карактери, алфанумерички</span><img class="info-icon" src="./assets/info_black_18dp.svg" alt="info icon"
                   /></span>
