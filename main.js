@@ -33,60 +33,15 @@ const errCorrLvl = qrcodegen.QrCode.Ecc.MEDIUM; //Error correction level
 
 const type = "1"; // QR type (can also be "MKD")
 const version = "0100"; // Version of the specifications used in the QR (first 2 numbers are main version, second 2 numbers are the sub-version).
-const characterSet = "2"; // Character encoding (1 for UTF-8 latin restricted character set, 2 for UTF-8 with cyrillic character set)
+const characterSet = 2; // Character encoding (1 for UTF-8 latin restricted character set, 2 for UTF-8 with cyrillic character set)
 const trailer = "EPD"; //Unambiguous indicator for the end of the payment data (EPD - End Payment Data)
 
-const typeSpan = document.createElement("span");
-const typeValueSpan = document.createElement("span");
-typeSpan.innerText = "QR Тип";
-typeSpan.classList.add("bold");
-typeValueSpan.innerText = type;
+appendInfoOnScreen();
 
-const versionSpan = document.createElement("span");
-const versionValueSpan = document.createElement("span");
-versionSpan.innerText = "Верзија";
-versionSpan.classList.add("bold");
-versionValueSpan.innerText = version;
-
-const characterSetSpan = document.createElement("span");
-const characterSetValueSpan = document.createElement("span");
-characterSetSpan.innerText = "Енкодирање карактери";
-characterSetSpan.classList.add("bold");
-characterSetValueSpan.innerText = characterSet;
-
-const trailerSpan = document.createElement("span");
-const trailerValueSpan = document.createElement("span");
-trailerSpan.innerText = "Трејлер";
-trailerSpan.classList.add("bold");
-trailerValueSpan.innerText = trailer;
-
-const wrapDiv1 = document.createElement("div");
-wrapDiv1.appendChild(typeSpan);
-wrapDiv1.append(": ");
-wrapDiv1.appendChild(typeValueSpan);
-const wrapDiv2 = document.createElement("div");
-wrapDiv2.appendChild(versionSpan);
-wrapDiv2.append(": ");
-wrapDiv2.appendChild(versionValueSpan);
-const wrapDiv3 = document.createElement("div");
-wrapDiv3.appendChild(characterSetSpan);
-wrapDiv3.append(": ");
-wrapDiv3.appendChild(characterSetValueSpan);
-const wrapDiv4 = document.createElement("div");
-wrapDiv4.appendChild(trailerSpan);
-wrapDiv4.append(": ");
-wrapDiv4.appendChild(trailerValueSpan);
-
-const wrapDivAll = document.createElement("div");
-wrapDivAll.classList.add("stats-style");
-
-wrapDivAll.appendChild(wrapDiv1);
-wrapDivAll.appendChild(wrapDiv2);
-wrapDivAll.appendChild(wrapDiv3);
-wrapDivAll.appendChild(wrapDiv4);
-
-btnContainer.appendChild(wrapDivAll);
-
+// Овој код додава event listener на секое input поле, за кога ќе кликнеме на тоа поле да се
+// тргне css стилот за грешно пополнето поле доколку полето било означено како грешно.
+// ("required-active" додава црвена линија околу полето, така да
+// со отстранување на овој стил се враќа нормалниот изглед на полето).
 for (let i = 0; i < listOfFields.length; i++) {
   listOfFields[i].addEventListener("focus", (e) => {
     e.target.classList.remove("required-active");
@@ -142,6 +97,8 @@ btnPreview.addEventListener("click", (e) => {
   let keys = Object.keys(fieldsObj);
   let values = Object.values(fieldsObj);
 
+  qrText = "mkqr://pay?";
+
   for (let i = 0; i < keys.length; i++) {
     if (i !== keys.length - 1) {
       qrText = qrText + keys[i] + "=" + values[i] + "&";
@@ -150,7 +107,8 @@ btnPreview.addEventListener("click", (e) => {
     }
   }
 
-  console.log(encodeURI(qrText)); //Test purposes
+  qrText = qrText.split(" ").join("%20");
+  console.log(qrText); //Test purposes
   drawQrCode("display-block");
 
   let svgImageString = generateSvgString();
@@ -478,7 +436,7 @@ function refreshQR(className) {
   qrWidthHeight.innerText = canvas.width + "x" + canvas.height;
 }
 
-// Setup for the QR
+// Функција за исцртување на QR кодот на екран
 function drawCanvas(qr, scale, border, lightColor, darkColor, canvas) {
   if (scale <= 0 || border < 0) throw "Value out of range";
   const width = (qr.size + border * 2) * scale;
@@ -500,22 +458,21 @@ function appendCanvas(className) {
   return result;
 }
 
-// Creating the QR
+// Функција за поедноставување и почитливост при генерирање QR kod кој ја користи функцијата toSvgString()
 function drawQrCode(className) {
-  let text = encodeURI(qrText); //Text to encode to the QR code
-
-  const qrCode = qrcodegen.QrCode.encodeText(text, errCorrLvl);
-
+  const qrCode = qrcodegen.QrCode.encodeText(qrText, errCorrLvl);
   drawCanvas(qrCode, qrScale, qrBorder, "#FFFFFF", "#000000", appendCanvas(className));
 }
 
-//Generating svg string
+// Функција за поедноставување и почитливост при генерирање SVG стринг кој ја користи функцијата toSvgString()
 function generateSvgString() {
-  let text = encodeURI(qrText);
-  const qrCode = qrcodegen.QrCode.encodeText(text, errCorrLvl);
+  const qrCode = qrcodegen.QrCode.encodeText(qrText, errCorrLvl);
   return toSvgString(qrCode, qrBorder, "#FFFFFF", "#000000");
 }
 
+// Функција за генерирање на SVG стринг за да може генерираниот QR код да се симне во SVG формат
+// Генерираниот SVG стринг се додава во линк за симнување
+// Оваа функција е copy-paste од примерите од библиотеката за генерирање QR код
 function toSvgString(qr, border, lightColor, darkColor) {
   if (border < 0) throw "Border must be non-negative";
   let parts = [];
@@ -531,4 +488,69 @@ function toSvgString(qr, border, lightColor, darkColor) {
 <path d="${parts.join(" ")}" fill="${darkColor}"/>
 </svg>
 `;
+}
+
+// Оваа функција додава/прикажува текстуални информации на екранот/формата како:
+// QR Тип, Верзија на стандардот, Тип на енкодирање на карактери, и трејлер текстот кој се додава на крајот од QR стрингот.
+// Во случајов елементите се лоцирани под копчето "Прегледај".
+function appendInfoOnScreen() {
+  // Креирање елементи за "QR Тип"
+  const typeSpan = document.createElement("span");
+  const typeValueSpan = document.createElement("span");
+  typeSpan.innerText = "QR Тип";
+  typeSpan.classList.add("bold");
+  typeValueSpan.innerText = type;
+
+  // Креирање елементи за "Верзија на стандарот"
+  const versionSpan = document.createElement("span");
+  const versionValueSpan = document.createElement("span");
+  versionSpan.innerText = "Верзија";
+  versionSpan.classList.add("bold");
+  versionValueSpan.innerText = version;
+
+  // Креирање елементи за "Енкодирање на карактери"
+  const characterSetSpan = document.createElement("span");
+  const characterSetValueSpan = document.createElement("span");
+  characterSetSpan.innerText = "Енкодирање карактери";
+  characterSetSpan.classList.add("bold");
+  characterSetValueSpan.innerText = characterSet;
+
+  // Креирање елементи за "Трејлер текстот"
+  const trailerSpan = document.createElement("span");
+  const trailerValueSpan = document.createElement("span");
+  trailerSpan.innerText = "Трејлер";
+  trailerSpan.classList.add("bold");
+  trailerValueSpan.innerText = trailer;
+
+  // Подредување и завиткување/енкапсулирање на креираните елементи во сопствени div елементи
+  const wrapDiv1 = document.createElement("div");
+  wrapDiv1.appendChild(typeSpan);
+  wrapDiv1.append(": ");
+  wrapDiv1.appendChild(typeValueSpan);
+  const wrapDiv2 = document.createElement("div");
+  wrapDiv2.appendChild(versionSpan);
+  wrapDiv2.append(": ");
+  wrapDiv2.appendChild(versionValueSpan);
+  const wrapDiv3 = document.createElement("div");
+  wrapDiv3.appendChild(characterSetSpan);
+  wrapDiv3.append(": ");
+  wrapDiv3.appendChild(characterSetValueSpan);
+  const wrapDiv4 = document.createElement("div");
+  wrapDiv4.appendChild(trailerSpan);
+  wrapDiv4.append(": ");
+  wrapDiv4.appendChild(trailerValueSpan);
+
+  // Креирање на "главен" div елемент за завиткување/енкапсулирање на погоре креираните div елементи
+  const wrapDivAll = document.createElement("div");
+  wrapDivAll.classList.add("stats-style");
+
+  // Додавање на сите div-ови во главниот div елемент
+  wrapDivAll.appendChild(wrapDiv1);
+  wrapDivAll.appendChild(wrapDiv2);
+  wrapDivAll.appendChild(wrapDiv3);
+  wrapDivAll.appendChild(wrapDiv4);
+
+  // Додавање на главниот div во некој елемент на екранот (Во случајов на btnContainer елементот)
+  // Вака елементите ќе се прикажат под копчето "Прегледај"
+  btnContainer.appendChild(wrapDivAll);
 }
