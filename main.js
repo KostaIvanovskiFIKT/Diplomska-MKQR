@@ -96,6 +96,7 @@ for (let i = 0; i < listOfFields.length; i++) {
 btnPreview.addEventListener("click", (e) => {
   e.preventDefault();
   validateData();
+  if (modalScreen.classList.contains("display-toggle")) return;
 
   //Here can be changed the names of the keys and values as well as their order
   const fieldsObj = {
