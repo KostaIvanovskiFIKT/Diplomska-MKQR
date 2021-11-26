@@ -31,7 +31,7 @@ const errCorrLvl = qrcodegen.QrCode.Ecc.MEDIUM; //Error correction level
 // HIGH - The QR Code can tolerate about 30% erroneous codewords
 // Bigger Error Correction Level also means the QR will be larger
 
-const type = "1"; // QR type (can also be "MKD")
+const type = 1; // QR type (can also be "MKD")
 const version = "0100"; // Version of the specifications used in the QR (first 2 numbers are main version, second 2 numbers are the sub-version).
 const characterSet = 2; // Character encoding (1 for UTF-8 latin restricted character set, 2 for UTF-8 with cyrillic character set)
 const trailer = "EPD"; //Unambiguous indicator for the end of the payment data (EPD - End Payment Data)
@@ -365,7 +365,9 @@ referenceType.addEventListener("change", () => {
 
 function validateData() {
   let fieldsMissingValue = false;
+  let fieldsHaveWhiteSpace = false;
   let messageMissingValue = "На едно или повеќе задолжителни полиња им недостасува вредност!";
+  let messageWhiteSpaceValue = "На едно или повеќе полиња има празно место на почетокот или на крајот од внесените податоци";
 
   if (
     document.getElementById("debtorName").value ||
@@ -424,8 +426,13 @@ function validateData() {
     if (listOfFields[i].required === false && listOfFields[i].classList.contains("required-active")) {
       listOfFields[i].classList.remove("required-active");
     }
+    if (listOfFields[i].value.startsWith(" ") || listOfFields[i].value.endsWith(" ")) {
+      listOfFields[i].classList.add("required-active");
+      fieldsHaveWhiteSpace = true;
+    }
   }
   if (fieldsMissingValue) throw alert(messageMissingValue);
+  if (fieldsHaveWhiteSpace) throw alert(messageWhiteSpaceValue);
 }
 
 //Redraws the qr
