@@ -21,20 +21,20 @@ let canvasDefaultHeight;
 let firstClickOnPreview = true;
 let svgUrl;
 
-let qrScale = 5; //Default value, can be changed here
-let qrBorder = 3; //Default value, can be changed here, this is the white (can be other colors as well) border around the QR Code
-const canvasMaxHeight = 805; //Max height for the canvas, bigger than this will overlap with the text on screen unless the css is styled differently, can only be changed here
-const errCorrLvl = qrcodegen.QrCode.Ecc.MEDIUM; //Error correction level
-// LOW - The QR Code can tolerate about  7% erroneous codewords
-// MEDIUM - The QR Code can tolerate about 15% erroneous codewords
-// QUARTILE - The QR Code can tolerate about 25% erroneous codewords
-// HIGH - The QR Code can tolerate about 30% erroneous codewords
-// Bigger Error Correction Level also means the QR will be larger
+let qrScale = 5; // Стандардна и почетна вредност за големината и размерот на исцртаниот QR код. Може да биде променета само тука.
+let qrBorder = 3; // Стандардна и почетна вредност за големината и размерот на границата на исцртаниот QR код. Ова е белата (може да биде и други бои) граница околу QR кодот. Може да биде променета само тука.
+const canvasMaxHeight = 805; // Максималната висина за canvas елементот на кој ќе се исцрта QR кодот. Целта на ова е за да не дојде до преклопување на исцртаниот QR код со елементите на екранот. Може да се промени само тука.
+const errCorrLvl = qrcodegen.QrCode.Ecc.MEDIUM; // Error correction level (Ниво за поправка на грешки)
+// LOW - QR кодот може да толерира околу 7% погрешни кодни зборови
+// MEDIUM - QR кодот може да толерира околу 15% погрешни кодни зборови
+// QUARTILE - QR кодот може да толерира околу 25% погрешни кодни зборови
+// HIGH - QR кодот може да толерира околу 30% погрешни кодни зборови
+// Поголемо ниво значи поголем QR код
 
-const type = 1; // QR type (can also be "MKD")
-const version = "0100"; // Version of the specifications used in the QR (first 2 numbers are main version, second 2 numbers are the sub-version).
-const characterSet = 2; // Character encoding (1 for UTF-8 latin restricted character set, 2 for UTF-8 with cyrillic character set)
-const trailer = "EPD"; //Unambiguous indicator for the end of the payment data (EPD - End Payment Data)
+const type = 1; // Тип на QR (може да биде и "MKD")
+const version = "0100"; // Верзија на спецификациите и стандардите користени во QR кодот (Првите два броеви се главната верзијата, а вторите два борја се под-верзијата)
+const characterSet = 2; // Енкодирање на карактери (1 за UTF-8 со латински рестриктирани карактери, 2 за UTF-8 со кирилични карактери)
+const trailer = "EPD"; // Недвосмислена ознака/индикатор за крајот на податоците за исплатата (EPD - End Payment Data)
 
 appendInfoOnScreen();
 
@@ -50,10 +50,17 @@ for (let i = 0; i < listOfFields.length; i++) {
 
 btnPreview.addEventListener("click", (e) => {
   e.preventDefault();
-  validateData();
+
+  // Доколку е вклучен модалниот екран а таб редоследот е на копчето "Прегледај" тогаш
+  // со притиснување на Enter ќе се прикажат повеќе QR кодови и текст за пополнетите податоци и ќе се направи overlap
+  // Оваа линија код го спречува тоа така што ја прекинува функционалноста на копчето доколку модалниот екран е вклучен
   if (modalScreen.classList.contains("display-toggle")) return;
 
-  //Here can be changed the names of the keys and values as well as their order
+  // Во оваа функција се содржани сите правила за валидност на пополнетите податоци
+  validateData();
+
+  // Објект кој ги содржи клуч-вредностите за составување на QR стрингот
+  // Тука може да се променат имињата на клучевите, нивните вредности, и редоследот
   const fieldsObj = {
     t: type,
     v: version,
@@ -97,8 +104,10 @@ btnPreview.addEventListener("click", (e) => {
   let keys = Object.keys(fieldsObj);
   let values = Object.values(fieldsObj);
 
+  // Сетирање на почетна вредност на QR текстот
   qrText = "mkqr://pay?";
 
+  // Составување на стрингот
   for (let i = 0; i < keys.length; i++) {
     if (i !== keys.length - 1) {
       qrText = qrText + keys[i] + "=" + values[i] + "&";
@@ -108,7 +117,6 @@ btnPreview.addEventListener("click", (e) => {
   }
 
   qrText = qrText.split(" ").join("%20");
-  console.log(qrText); //Test purposes
   drawQrCode("display-block");
 
   let svgImageString = generateSvgString();
@@ -361,8 +369,10 @@ referenceType.addEventListener("change", () => {
   }
 });
 
-// Functions Below
+// Функции
 
+// Функција за валидација на полињата (моментално проверува дали задолжителните полиња се празни
+// и дали има празни места на почетокот и крајот од внесените податоци)
 function validateData() {
   let fieldsMissingValue = false;
   let fieldsHaveWhiteSpace = false;
@@ -435,7 +445,8 @@ function validateData() {
   if (fieldsHaveWhiteSpace) throw alert(messageWhiteSpaceValue);
 }
 
-//Redraws the qr
+// Функција за одново исцртување на QR кодот на екран и ажурирање на текстот на екранот кој ја
+// прикажува ширината и висината на QR кодот
 function refreshQR(className) {
   qrCodeContainer.removeChild(qrCodeContainer.firstChild);
   drawQrCode(className);
@@ -458,6 +469,9 @@ function drawCanvas(qr, scale, border, lightColor, darkColor, canvas) {
   }
 }
 
+// Функција за креирање на canvas елемент на кој што ќе се исцрта QR кодот
+// className параметарот е за да може да додаваме стилови на canvasot како display-none, display-block итн
+// за поголема флексибилност и контрола
 function appendCanvas(className) {
   let result = document.createElement("canvas");
   result.classList.add(className);
