@@ -16,26 +16,31 @@ const listOfFields = document.querySelectorAll(".input-style, .input-style-selec
 const creditorSelect = document.getElementById("creditorAdressType");
 const debtorSelect = document.getElementById("debtorAdressType");
 const referenceType = document.getElementById("paymentType");
-let qrText = "";
-let canvasDefaultHeight;
-let firstClickOnPreview = true;
-let svgUrl;
+let qrText = ""; // Не смее да се промени тука
+let canvasDefaultHeight; // Не смее да се промени тука
+let firstClickOnPreview = true; // Не смее да се промени тука
+let svgUrl; // Не смее да се промени тука
+//---------------------------------------------------------------------------------------------------------------
 
 let qrScale = 5; // Стандардна и почетна вредност за големината и размерот на исцртаниот QR код. Може да биде променета само тука.
 let qrBorder = 3; // Стандардна и почетна вредност за големината и размерот на границата на исцртаниот QR код. Ова е белата (може да биде и други бои) граница околу QR кодот. Може да биде променета само тука.
 const canvasMaxHeight = 805; // Максималната висина за canvas елементот на кој ќе се исцрта QR кодот. Целта на ова е за да не дојде до преклопување на исцртаниот QR код со елементите на екранот. Може да се промени само тука.
-const errCorrLvl = qrcodegen.QrCode.Ecc.MEDIUM; // Error correction level (Ниво за поправка на грешки)
+const errCorrLvl = qrcodegen.QrCode.Ecc.MEDIUM; // Error correction level (Ниво за поправка на грешки). Може да се промени тука.
 // LOW - QR кодот може да толерира околу 7% погрешни кодни зборови
 // MEDIUM - QR кодот може да толерира околу 15% погрешни кодни зборови
 // QUARTILE - QR кодот може да толерира околу 25% погрешни кодни зборови
 // HIGH - QR кодот може да толерира околу 30% погрешни кодни зборови
 // Поголемо ниво значи поголем QR код
 
+// Овие вредности се користат само за креирање на стрингот/текстот што треба да се претвори во QR код и немаат никаква функционалност во проектот.
+// Овие полиња не се пополнуваат од страна на корисникот и можат да се порменат само тука.
+// Вредностите од тука се доделуваат во објектот од кој што се составува стрингот за QR кодот
 const type = 1; // Тип на QR (може да биде и "MKD")
-const version = "0100"; // Верзија на спецификациите и стандардите користени во QR кодот (Првите два броеви се главната верзијата, а вторите два борја се под-верзијата)
-const characterSet = 2; // Енкодирање на карактери (1 за UTF-8 со латински рестриктирани карактери, 2 за UTF-8 со кирилични карактери)
-const trailer = "EPD"; // Недвосмислена ознака/индикатор за крајот на податоците за исплатата (EPD - End Payment Data)
+const version = "0100"; // Верзија на спецификациите и стандардите користени во QR кодот (Првите два броеви се главната верзијата, а вторите два борја се под-верзијата). Вредноста е тип стринг затоа што неможе да има водечки нули во javascript односно outputot е друг број освен внесениот доколку има водечки нули.
+const characterSet = 2; // Енкодирање на карактери (1 за UTF-8 со латински рестриктирани карактери, 2 за UTF-8 со кирилични карактери).
+const trailer = "EPD"; // Недвосмислена ознака/индикатор за крајот на податоците за исплатата (EPD - End Payment Data).
 
+// Поставување на горните полиња на екранот (Позицијата и стилот е одредено во функцијата).
 appendInfoOnScreen();
 
 // Овој код додава event listener на секое input поле, за кога ќе кликнеме на тоа поле да се
@@ -48,19 +53,22 @@ for (let i = 0; i < listOfFields.length; i++) {
   });
 }
 
+// Главните функционалности.
+// Се додава функционалност на копчето "Прегледај" при негово кликнување.
 btnPreview.addEventListener("click", (e) => {
   e.preventDefault();
 
   // Доколку е вклучен модалниот екран а таб редоследот е на копчето "Прегледај" тогаш
-  // со притиснување на Enter ќе се прикажат повеќе QR кодови и текст за пополнетите податоци и ќе се направи overlap
+  // со притиснување на Enter ќе се прикажат повеќе дупликат QR кодови и текст за пополнетите податоци, едно до друго.
   // Оваа линија код го спречува тоа така што ја прекинува функционалноста на копчето доколку модалниот екран е вклучен
   if (modalScreen.classList.contains("display-toggle")) return;
 
   // Во оваа функција се содржани сите правила за валидност на пополнетите податоци
   validateData();
 
-  // Објект кој ги содржи клуч-вредностите за составување на QR стрингот
-  // Тука може да се променат имињата на клучевите, нивните вредности, и редоследот
+  // Објект кој ги содржи клуч-вредностите за составување на QR стрингот.
+  // Тука може да се променат имињата на клучевите, нивните вредности, и редоследот.
+  // Редоследот е според моменталниот стандард за MKQR. Сепак редоследот не е важен и само се подредени според стандардот за почитливост/прегледност.
   const fieldsObj = {
     t: type,
     v: version,
@@ -101,13 +109,14 @@ btnPreview.addEventListener("click", (e) => {
     trailer_PLACEHOLDER: trailer,
   };
 
-  let keys = Object.keys(fieldsObj);
-  let values = Object.values(fieldsObj);
+  // Создавање нови променливи кои ги содржат клучевите и вредностите, соодветно во низа, за да може да се состави QR стрингот.
+  let keys = Object.keys(fieldsObj); // Низа(Array) од клучевите
+  let values = Object.values(fieldsObj); // Низа(Array) од вредностите
 
-  // Сетирање на почетна вредност на QR текстот
+  // Поставување на почетна вредност на QR текстот
   qrText = "mkqr://pay?";
 
-  // Составување на стрингот
+  // Составување на стрингот/текстот за QR кодот
   for (let i = 0; i < keys.length; i++) {
     if (i !== keys.length - 1) {
       qrText = qrText + keys[i] + "=" + values[i] + "&";
@@ -115,17 +124,30 @@ btnPreview.addEventListener("click", (e) => {
       qrText = qrText + values[i];
     }
   }
-
+  // Замена на празните полиња со "%20"
   qrText = qrText.split(" ").join("%20");
+
+  // Исцртување на QR кодот каде на canvas елементот му се додава класата како аргумент
   drawQrCode("display-block");
 
+  // Составување на SVG стрингот
   let svgImageString = generateSvgString();
+  // Претворање на стрингот во URL за да може да се симне QR кодот во SVG формат
   svgUrl = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svgImageString);
 
+  // Поврзување и креирање на елементите кои ќе се прикажат на модалниот екран.
+  // Се прикажуваат пополнетите елементи за преглед на внесените податоци.
+  // Елементите кои се прикажуваат се оние полиња кои се пополнети.
   const labels = document.querySelectorAll("label");
   const inputs = document.querySelectorAll(".input-style, .input-style-select");
-
   for (let i = 0; i < labels.length; i++) {
+    // "Хардкодирано" решение за подредување на насловите на групата на која што припаѓаат елементите.
+    // Доколку i е наведената вредност, се вметнува насловот на групата и следните полиња што ќе се прикажат
+    // на модалниот екран ќе се тие полиња што припаѓаат на таа група, се до следната бројка во останатите услови.
+    // Овие услови секогаш се извршуваат само еднаш без разлика дали има поплнети полиња во таа група или не.
+    // Разликата помеѓу едната и другата вредност во условите е бројот на полиња помеѓу едниот наслов и другиот наслов.
+    //-----------------------------------------------------------------------------------------------------------------
+    // Вметнување на насловот за "Информација за Доверител (Примач)" групата.
     if (i === 0) {
       const titleCreditor = document.querySelector(".creditor-title-container h2.title");
       const filledDataTitleCreditor = document.createElement("h3");
@@ -133,6 +155,7 @@ btnPreview.addEventListener("click", (e) => {
       filledDataTitleCreditor.innerText = titleCreditor.innerText;
       filledData.appendChild(filledDataTitleCreditor);
     }
+    // Вметнување на насловот за "Информација за Должник (Плаќач)" групата.
     if (i === 9) {
       const titleDebtor = document.querySelector(".debtor-title-container h2.title");
       const filledDataTitleDebtor = document.createElement("h3");
@@ -140,6 +163,7 @@ btnPreview.addEventListener("click", (e) => {
       filledDataTitleDebtor.innerText = titleDebtor.innerText;
       filledData.appendChild(filledDataTitleDebtor);
     }
+    // Вметнување на насловот за "Детали за Наплата" групата.
     if (i === 16) {
       const titlePaymentInfo = document.querySelector(".paymentInfo-title-container h2.title");
       const filledDataTitlePaymentInfo = document.createElement("h3");
@@ -147,6 +171,7 @@ btnPreview.addEventListener("click", (e) => {
       filledDataTitlePaymentInfo.innerText = titlePaymentInfo.innerText;
       filledData.appendChild(filledDataTitlePaymentInfo);
     }
+    // Вметнување на насловот за "Дополнителни Податоци" групата.
     if (i === 27) {
       const titleAdditionalInfo = document.querySelector(".additionalInfo-title-container h2.title");
       const filledDataTitleAdditionalInfo = document.createElement("h3");
@@ -154,6 +179,10 @@ btnPreview.addEventListener("click", (e) => {
       filledDataTitleAdditionalInfo.innerText = titleAdditionalInfo.innerText;
       filledData.appendChild(filledDataTitleAdditionalInfo);
     }
+
+    // Вметнување на имињата на полињата и нивните вредности на модалниот екран.
+    // Доколку корисникот внесол податоци во полето т.е. полето има вредност, на модалниот екран
+    // ќе се прикаже името на полето и внесената вредност а доколку нема внесена вредност ништо не се случува.
     if (inputs[i].value) {
       const p = document.createElement("p");
       const spanLabel = document.createElement("span");
@@ -162,6 +191,8 @@ btnPreview.addEventListener("click", (e) => {
       spanInputValue.classList.add("span-input-data");
       p.classList.add("p-data-style");
       spanLabel.innerText = labels[i].innerText;
+      // Овој услов е само затоа што за некои полиња се избира вредност наместо да се пополни и треба на поинаков
+      // начин да се земе вредноста на полето.
       if (inputs[i].options) {
         spanInputValue.innerText = inputs[i].options[inputs[i].selectedIndex].innerText;
       } else {
@@ -173,6 +204,9 @@ btnPreview.addEventListener("click", (e) => {
       filledData.appendChild(p);
     }
 
+    // Доколку групата на полиња нема ниедно пополнето поле, на модалниот екран се додава "-" под насловот на групата.
+    // Доколку i е 15, тоа значи дека полињата за должникот се веќе проверени и ако се празни се додава "-".
+    // Доколку i е 27, тоа значи дека полињата за дополнителни податоци се веќе проверени и ако се празни се додава "-"
     if (
       i === 15 &&
       !document.getElementById("debtorName").value &&
@@ -204,6 +238,7 @@ btnPreview.addEventListener("click", (e) => {
     }
   }
 
+  // Се активира модалниот екран на крајот од останатите функции
   modalScreen.classList.add("display-toggle");
   qrScreen.classList.add("display-toggle-flex");
 
@@ -369,7 +404,7 @@ referenceType.addEventListener("change", () => {
   }
 });
 
-// Функции
+//------------------------------ Функции---------------------------------------------
 
 // Функција за валидација на полињата (моментално проверува дали задолжителните полиња се празни
 // и дали има празни места на почетокот и крајот од внесените податоци)
