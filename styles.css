@@ -337,7 +337,7 @@ h2 {
   min-width: 415px;
   min-height: 415px;
   overflow: visible;
-  transform: scale(0.5); /* Scale of the QR Code */
+  transform: scale(0.5); /* Размер на QR кодот прикажан на екранот */
 }
 
 .qr-options h3 {
