@@ -29,6 +29,8 @@ let svgUrl; // Не смее да се промени тука
 // За прикажување на 50% од големината се користи атрибут во CSS фајлот (.qrCode-container{transform: scale(0.5)}) и ова може да се промени произволно.
 let qrScale = 5; // Стандардна и почетна вредност за размерот на исцртаниот QR код. Може да се промени тука.
 let qrBorder = 3; // Стандардна и почетна вредност за размерот на границата на исцртаниот QR код. Ова е белата (може да биде и други бои) граница околу QR кодот. Може да се промени тука.
+let qrDarkColor = "#000000"; // Темна боја користена при генерација на QR кодот. Може да се промени тука.
+let qrLightColor = "#FFFFFF"; // Светла боја користена при генерација на QR кодот. Може да се промени тука.
 const canvasMaxHeight = 805; // Максималната висина за canvas елементот на кој ќе се исцрта QR кодот. Целта на ова е за да не дојде до преклопување на исцртаниот QR код со елементите на екранот. Може да се промени тука.
 const errCorrLvl = qrcodegen.QrCode.Ecc.MEDIUM; // Error correction level (Ниво за поправка на грешки). Може да се промени тука.
 // LOW - QR кодот може да толерира околу 7% погрешни кодни зборови
@@ -576,13 +578,13 @@ function appendCanvas(className) {
 // Функција за поедноставување и почитливост при генерирање QR код кој ја користи функцијата toSvgString()
 function drawQrCode(className) {
   const qrCode = qrcodegen.QrCode.encodeText(qrText, errCorrLvl);
-  drawCanvas(qrCode, qrScale, qrBorder, "#FFFFFF", "#000000", appendCanvas(className));
+  drawCanvas(qrCode, qrScale, qrBorder, qrLightColor, qrDarkColor, appendCanvas(className));
 }
 
 // Функција за поедноставување и почитливост при генерирање SVG стринг кој ја користи функцијата toSvgString()
 function generateSvgString() {
   const qrCode = qrcodegen.QrCode.encodeText(qrText, errCorrLvl);
-  return toSvgString(qrCode, qrBorder, "#FFFFFF", "#000000");
+  return toSvgString(qrCode, qrBorder, qrLightColor, qrDarkColor);
 }
 
 // Функција за генерирање на SVG стринг за да може генерираниот QR код да се симне во SVG формат
