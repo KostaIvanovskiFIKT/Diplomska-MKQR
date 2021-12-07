@@ -288,6 +288,7 @@ h2 {
 
 .lower-opacity {
   opacity: 0.4;
+  pointer-events: none;
 }
 
 .lower-opacity:hover .tooltip {

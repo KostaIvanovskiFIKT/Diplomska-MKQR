@@ -357,6 +357,10 @@ btnExitModalScreen.addEventListener("click", () => {
 // 0 е "Структурирана".
 // 1 е "Комбинирана".
 creditorSelect.addEventListener("change", () => {
+  // Се отстранува црвената боја доколку биле грешни полињата во моментот кога е сменета селекцијата
+  document.getElementById("creditorTown").classList.remove("required-active");
+  document.getElementById("creditorPostalCode").classList.remove("required-active");
+
   if (creditorSelect.options.selectedIndex === 1) {
     const townField = document.querySelector(".creditorTownDiv");
     townField.classList.add("lower-opacity");
@@ -405,6 +409,10 @@ creditorSelect.addEventListener("change", () => {
 // 1 е "Структурирана".
 // 2 е "Комбинирана".
 debtorSelect.addEventListener("change", () => {
+  // Се отстранува црвената боја доколку биле грешни полињата во моментот кога е сменета селекцијата
+  document.getElementById("debtorTown").classList.remove("required-active");
+  document.getElementById("debtorPostalCode").classList.remove("required-active");
+
   if (debtorSelect.options.selectedIndex === 2) {
     const townField = document.querySelector(".debtorTownDiv");
     townField.classList.add("lower-opacity");
@@ -458,6 +466,14 @@ referenceType.addEventListener("change", () => {
     document.getElementById("paymentReference").setAttribute("maxlength", 25);
   } else {
     document.getElementById("paymentReference").setAttribute("maxlength", 27);
+  }
+
+  if (referenceType.options.selectedIndex === 0) {
+    document.getElementById("paymentReference").disabled = true;
+    document.getElementById("paymentReferenceDiv").classList.add("lower-opacity");
+  } else {
+    document.getElementById("paymentReference").disabled = false;
+    document.getElementById("paymentReferenceDiv").classList.remove("lower-opacity");
   }
 });
 
