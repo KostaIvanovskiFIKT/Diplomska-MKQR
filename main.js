@@ -533,7 +533,7 @@ function validateData() {
     document.getElementById("aInfoPP50IncomeCode").required = false;
   }
 
-  if (document.getElementById("paymentType").options.selectedIndex === 1 || document.getElementById("paymentType").options.selectedIndex) {
+  if (document.getElementById("paymentType").options.selectedIndex === 1 || document.getElementById("paymentType").options.selectedIndex === 2) {
     document.getElementById("paymentReference").required = true;
   } else {
     document.getElementById("paymentReference").required = false;
