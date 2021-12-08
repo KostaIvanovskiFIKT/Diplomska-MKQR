@@ -469,11 +469,12 @@ referenceType.addEventListener("change", () => {
   }
 
   if (referenceType.options.selectedIndex === 0) {
+    document.getElementById("paymentReference").value = "";
     document.getElementById("paymentReference").disabled = true;
-    document.getElementById("paymentReferenceDiv").classList.add("lower-opacity");
+    document.querySelector(".paymentReferenceDiv").classList.add("lower-opacity");
   } else {
     document.getElementById("paymentReference").disabled = false;
-    document.getElementById("paymentReferenceDiv").classList.remove("lower-opacity");
+    document.querySelector(".paymentReferenceDiv").classList.remove("lower-opacity");
   }
 });
 
@@ -532,7 +533,7 @@ function validateData() {
     document.getElementById("aInfoPP50IncomeCode").required = false;
   }
 
-  if (document.getElementById("paymentType").options.selectedIndex === 1) {
+  if (document.getElementById("paymentType").options.selectedIndex === 1 || document.getElementById("paymentType").options.selectedIndex) {
     document.getElementById("paymentReference").required = true;
   } else {
     document.getElementById("paymentReference").required = false;
