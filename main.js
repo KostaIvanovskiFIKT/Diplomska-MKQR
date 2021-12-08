@@ -471,6 +471,7 @@ referenceType.addEventListener("change", () => {
   if (referenceType.options.selectedIndex === 0) {
     document.getElementById("paymentReference").value = "";
     document.getElementById("paymentReference").disabled = true;
+    document.getElementById("paymentReference").classList.remove("required-active");
     document.querySelector(".paymentReferenceDiv").classList.add("lower-opacity");
   } else {
     document.getElementById("paymentReference").disabled = false;
