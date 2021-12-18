@@ -627,7 +627,7 @@ function appendCanvas(className) {
   return result;
 }
 
-// Функција за поедноставување и почитливост при генерирање QR код кој ја користи функцијата toSvgString()
+// Функција за поедноставување и почитливост при генерирање QR код кој ја користи функцијата drawCanvas()
 function drawQrCode(className) {
   const qrCode = qrcodegen.QrCode.encodeText(qrText, errCorrLvl);
   drawCanvas(qrCode, qrScale, qrBorder, qrLightColor, qrDarkColor, appendCanvas(className));
